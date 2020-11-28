@@ -27,6 +27,8 @@ class Login extends CI_Controller
     $this->lang->load('auth', 'indonesian');
     $this->load->helper(['url', 'language']);
 
+    // chek_session();
+
     $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
     if ($this->ion_auth->logged_in()) {
