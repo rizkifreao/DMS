@@ -32,6 +32,8 @@
   <script src="<?= base_url('public/global_assets/js/plugins/pickers/daterangepicker.js') ?>"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/notifications/jgrowl.min.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/notifications/noty.min.js"></script>
 
   <script src="<?= base_url('public/assets/js/app.js') ?>"></script>
   <!-- <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script> -->
@@ -41,7 +43,32 @@
 </head>
 
 <body>
+  <script>
+    Noty.overrideDefaults({
+      theme: 'limitless',
+      layout: 'topRight',
+      type: 'alert',
+      timeout: 2500
+    });
+  </script>
 
+  <?php $successMessage = $this->session->flashdata('successmessage');
+  $warningmessage = $this->session->flashdata('warningmessage');
+  echo $warningmessage;
+  if (isset($successMessage)) {
+    echo "<script> new Noty({
+                text: '$successMessage',
+                type: 'success'
+            }).show();</script>";
+  }
+
+  if (isset($warningmessage)) {
+    echo "<script> new Noty({
+      type: 'warning',
+      text: '$warningmessage' 
+      }).show();</script>";
+  }
+  ?>
   <!-- Main navbar -->
   <?php
   if (isset($_header)) {
@@ -94,7 +121,7 @@
       ?>
 
       <!-- Footer -->
-      <div class="navbar navbar-expand-lg navbar-light text-center">
+      <div class="navbar navbar-expand-lg navbar-light">
         <div class="text-center d-lg-none w-100">
           <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
             <i class="icon-unfold mr-2"></i>

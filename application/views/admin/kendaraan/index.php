@@ -37,9 +37,9 @@
       <h5 class="card-title">Tabel Data Kendaraan</h5>
       <div class="header-elements">
         <div class="list-icons">
+          <a href="<?php echo base_url(); ?>kendaraan/create" class="btn btn-primary btn-sm">Add New Vehicle</a>
           <a class="list-icons-item" data-action="collapse"></a>
           <a class="list-icons-item" data-action="reload"></a>
-          <a class="list-icons-item" data-action="remove"></a>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
             <td> <?php echo output($vehiclelists['v_model']); ?></td>
             <td><?php echo output($vehiclelists['v_chassis_no']); ?></td>
             <td><?php echo output($vehiclelists['v_engine_no']); ?></td>
-            <td> <span class="status-icon <?php echo ($vehiclelists['v_is_active'] == '1') ? 'bg-success' : 'bg-danger'; ?> "></span> <?php echo ($vehiclelists['v_is_active'] == '1') ? 'Active' : 'Inactive'; ?> </td>
+            <td> <span class="badge <?php echo ($vehiclelists['v_is_active'] == '1') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($vehiclelists['v_is_active'] == '1') ? 'Good' : 'Bad'; ?></span> </td>
             <td class="text-center">
               <div class="list-icons">
                 <div class="dropdown">
@@ -77,9 +77,8 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
-                    <a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to .csv</a>
-                    <a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a>
+                    <a href="<?php echo base_url('kendaraan/edit') . "/" . $vehiclelists['v_id'] ?>" class="dropdown-item"><i class="icon-pencil"></i>Ubah</a>
+                    <a href="#" class="dropdown-item"><i class="icon-eraser2"></i> Hapus</a>
                   </div>
                 </div>
               </div>
