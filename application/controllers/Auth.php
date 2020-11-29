@@ -114,7 +114,7 @@ class Auth extends CI_Controller
     $this->ion_auth->logout();
 
     // redirect them to the login page
-    redirect('auth/login', 'refresh');
+    redirect('login', 'refresh');
   }
 
   /**
@@ -127,7 +127,7 @@ class Auth extends CI_Controller
     $this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
 
     if (!$this->ion_auth->logged_in()) {
-      redirect('auth/login', 'refresh');
+      redirect('login', 'refresh');
     }
 
     $user = $this->ion_auth->user()->row();

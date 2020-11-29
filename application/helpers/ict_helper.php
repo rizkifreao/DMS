@@ -14,10 +14,11 @@ function chek_session()
     redirect('login');
   }
 }
+
 function chek_administrator()
 {
   $ci = &get_instance();
-  if ($ci->session->userdata('role') !== 'Administrator') {
+  if (!$ci->ion_auth->in_group('admin')) {
     redirect('dashboard');
   }
 }

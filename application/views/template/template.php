@@ -34,7 +34,7 @@
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/forms/selects/select2.min.js"></script>
 
   <script src="<?= base_url('public/assets/js/app.js') ?>"></script>
-  <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script>
+  <!-- <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script> -->
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/datatables_basic.js"></script>
   <!-- /theme JS files -->
 
@@ -84,11 +84,32 @@
 
 
     <!-- Main content -->
-    <?php
-    if (isset($_content)) {
-      echo (isset($_content) ? $_content : '');
-    }
-    ?>
+    <div class="content-wrapper">
+
+      <!-- Content area -->
+      <?php
+      if (isset($_content)) {
+        echo (isset($_content) ? $_content : '');
+      }
+      ?>
+
+      <!-- Footer -->
+      <div class="navbar navbar-expand-lg navbar-light text-center">
+        <div class="text-center d-lg-none w-100">
+          <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+            <i class="icon-unfold mr-2"></i>
+            Footer
+          </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-footer">
+          <span class="navbar-text">
+            &copy; 2020. <a href="#">Drivers Management Sistem</a> by <a href="#" target="_blank">Developers</a>
+          </span>
+        </div>
+      </div>
+      <!-- /footer -->
+    </div>
     <!-- /main content -->
 
   </div>

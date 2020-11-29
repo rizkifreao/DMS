@@ -16,11 +16,17 @@ class Dashboard extends CI_Controller
 
   public function index()
   {
-    $data['iechart'] = $this->dashboard_model->get_iechartdata();
-    $data['dashboard'] = $this->dashboard_model->getdashboard_info();
-    $data['vechicle_currentlocation'] = $this->dashboard_model->get_vechicle_currentlocation();
-    $data['vechicle_status'] = $this->dashboard_model->getvechicle_status();
-    $this->template->template_render('admin/dashboard', $data);
+    if($this->ion_auth->in_group('admin')){
+      $data['iechart'] = $this->dashboard_model->get_iechartdata();
+      $data['dashboard'] = $this->dashboard_model->getdashboard_info();
+      $data['vechicle_currentlocation'] = $this->dashboard_model->get_vechicle_currentlocation();
+      $data['vechicle_status'] = $this->dashboard_model->getvechicle_status();
+    }else{
+      // $data['driver'] 
+    }
+    $data['header_name'] = "Dashboard";
+    // echo json_encode($data);
+    $this->template->template_render('dashboard', $data);
   }
   public function iechart()
   {
