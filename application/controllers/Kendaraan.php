@@ -48,7 +48,7 @@ class Kendaraan extends CI_Controller
       if (!$testxss) {
         $errormsg = 'Error! Your input are not allowed.Please try again';
       }
-      $this->session->set_flashdata('warningmessage', trim(preg_replace('/\s\s+/', ' ', $errormsg)));
+      $this->session->set_flashdata('warningmessage', $errormsg);
       redirect('kendaraan/create');
     }
   }

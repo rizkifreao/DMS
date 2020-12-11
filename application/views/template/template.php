@@ -34,10 +34,16 @@
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/forms/selects/select2.min.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/notifications/jgrowl.min.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/notifications/noty.min.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/anytime.min.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
 
   <script src="<?= base_url('public/assets/js/app.js') ?>"></script>
   <!-- <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script> -->
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/datatables_basic.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/picker_date.js"></script>
   <!-- /theme JS files -->
 
 </head>
@@ -65,7 +71,7 @@
   if (isset($warningmessage)) {
     echo "<script> new Noty({
       type: 'warning',
-      text: '$warningmessage' 
+      text: '" . trim(preg_replace('/\s\s+/', ' ', $warningmessage)) . "' 
       }).show();</script>";
   }
   ?>
