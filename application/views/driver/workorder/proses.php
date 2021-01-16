@@ -126,7 +126,7 @@
           </div>
         </div>
         <!-- END CARD BODY -->
-        <input type="text" name="location" id="koordinat">
+        <input type="hidden" name="location" id="koordinat">
         <div class="card-footer d-flex justify-content-between align-items-center bg-teal-400 border-top-0">
           <button type="submit" class="btn bg-transparent text-white border-white border-2"> Batal
             <button type="submit" class="btn btn-outline bg-white text-white border-white border-2"> Simpan
@@ -154,7 +154,7 @@
   function showPosition(position) {
     console.log("Latitude: " + position.coords.latitude +
       "<br>Longitude: " + position.coords.longitude);
-    $("#koordinat").val(position.coords.latitude + "," + position.coords.longitude).hide()
+    $("#koordinat").val(position.coords.latitude + "," + position.coords.longitude)
     // x.innerHTML = "Latitude: " + position.coords.latitude +
     //   "<br>Longitude: " + position.coords.longitude;
   }
