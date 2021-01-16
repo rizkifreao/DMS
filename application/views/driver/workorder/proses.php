@@ -93,21 +93,21 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Photo Kilometer<span class="form-required">*</span></label>
-              <input name="p_km" type="file" accept="image/*;capture=camera" class="form-control-uniform-custom">
+              <input name="p_km" type="file" accept="image/*" capture="camera" class="form-control-uniform-custom">
             </div>
           </div>
 
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Photo Ukuran Bensin</span></label>
-              <input name="p_fuel" type="file" accept="image/*;capture=camera" class="form-control-uniform-custom">
+              <input name="p_fuel" type="file" accept="image/*" capture="camera" class="form-control-uniform-custom">
             </div>
           </div>
 
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Struk Pembelian Bensin</span></label>
-              <input name="s_fuel" type="file" accept="image/*;capture=camera" class="form-control-uniform-custom">
+              <input name="s_fuel" type="file" accept="image/*" capture="camera" class="form-control-uniform-custom">
             </div>
           </div>
 
