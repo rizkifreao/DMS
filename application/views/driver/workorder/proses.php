@@ -63,7 +63,7 @@
           <div class="col-sm-6 col-md-4">
             <div class="form-group">
               <label class="form-label">Kendaraan</span></label>
-              <input type="text" value="<?= $vechicle->v_name ?>" name="t_customer_id" id="t_customer_id" class="form-control" placeholder="Nama Pelanggan" disabled>
+              <input type="text" value="<?= $vechicle->v_name ?>" class="form-control" placeholder="Nama Pelanggan" disabled>
             </div>
           </div>
 
