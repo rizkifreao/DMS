@@ -71,7 +71,7 @@ class Wo extends CI_Controller
     if (!empty($p_fuel)) {
       $x = explode(".", $p_fuel);
       $ext = strtolower(end($x));
-      $config['file_name'] = $post['t_id'] . "-Bukti Bensin." . $ext;
+      $config['file_name'] = $post['t_id'] . "-Bukti_Bensin." . $ext;
       $bensin = $config['file_name'];
       $this->upload->initialize($config);
       $this->upload->do_upload('p_fuel');
@@ -80,7 +80,7 @@ class Wo extends CI_Controller
     if (!empty($s_fuel)) {
       $x = explode(".", $s_fuel);
       $ext = strtolower(end($x));
-      $config['file_name'] = $post['t_id'] . "-Struk Bensin." . $ext;
+      $config['file_name'] = $post['t_id'] . "-Struk_Bensin." . $ext;
       $struk_bensin = $config['file_name'];
       $this->upload->initialize($config);
       $this->upload->do_upload('s_fuel');
