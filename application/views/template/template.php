@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+  <title>Trips Manajemen Sistem</title>
 
   <!-- Global stylesheets -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -39,11 +39,13 @@
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
 
   <script src="<?= base_url('public/assets/js/app.js') ?>"></script>
   <!-- <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script> -->
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/datatables_basic.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/picker_date.js"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/form_inputs.js"></script>
   <!-- /theme JS files -->
 
 </head>
@@ -57,7 +59,11 @@
       timeout: 2500
     });
   </script>
-
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
   <?php $successMessage = $this->session->flashdata('successmessage');
   $warningmessage = $this->session->flashdata('warningmessage');
   echo $warningmessage;

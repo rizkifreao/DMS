@@ -48,11 +48,11 @@
       <thead>
         <tr>
           <th class="w-1">NO</th>
-          <th>Customer</th>
-          <th>Vechicle</th>
+          <th>Pelanggan</th>
+          <th>Kendaraan</th>
           <th>Type</th>
-          <th>Driver</th>
-          <th>Trip From & To</th>
+          <th>Supir</th>
+          <th>Alamat</th>
           <th>Payment Status</th>
           <th>Trip Status</th>
           <th class="text-center">Actions</th>
@@ -64,14 +64,11 @@
           <tr>
             <td> <?php echo output($count);
                   $count++; ?></td>
-            <td> <?php echo ucfirst($triplists['t_customer_details']->c_name); ?></td>
-            <td> <?php echo output($triplists['t_vechicle_details']->v_name) . '_' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
+            <td> <?php echo $triplists['t_customer_id']; ?></td>
+            <td> <?php echo output($triplists['t_vechicle_details']->v_name) . '-' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
             <td><?php echo ucfirst($triplists['t_type']); ?></td>
             <td><?php echo output($triplists['t_driver_details']->d_name); ?></td>
-            <td><?php $t_trip_fromlocation = explode(',', $triplists['t_trip_fromlocation']);
-                echo (isset($t_trip_fromlocation[0]) ? $t_trip_fromlocation[0] : '') . '<b><span class="fe fe-arrow-right"></span></b><br>';
-                $t_trip_tolocation = explode(',', $triplists['t_trip_tolocation']);
-                echo (isset($t_trip_tolocation[0]) ? $t_trip_tolocation[0] : ''); ?></td>
+            <td><?= $triplists['t_trip_fromlocation'] ?> &nbsp; <a href="<?= $triplists['t_trip_tolocation'] ?>" data-toggle="tooltip" target="_blank" title="Klik untuk membuka maps"><i class="icon-map5"></i></a></td>
             <td> <span class="badge <?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'Completed' : 'Pending'; ?> </span> </td>
             <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'badge-danger' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'OnGoing' : 'Completed'; ?></span>
               <br><?php echo ($triplists['t_trip_status'] == 'OnGoing' && isset($triplists['t_current_location'])) ? '<span style="font-size: 10px" class="fa fa-location-arrow"> ' . str_replace(',', '<br />', $triplists['t_current_location']) . '</span>' : '-'; ?> </td>

@@ -50,6 +50,28 @@ class Trips_model extends CI_Model
       return false;
     }
   }
+
+  public function getall_trips_by($data)
+  {
+    $newtripdata = array();
+    $tripdata = $this->db->select('*')->from('trips')->where($data)->order_by('t_id', 'desc')->get()->result_array();
+    if (!empty($tripdata)) {
+      foreach ($tripdata as $key => $tripdataval) {
+        $newtripdata[$key] = $tripdataval;
+        $newtripdata[$key]['t_customer_details'] =  $this->db->select('*')->from('customers')->where('c_id', $tripdataval['t_customer_id'])->get()->row();
+        $newtripdata[$key]['t_vechicle_details'] =  $this->db->select('*')->from('vehicles')->where('v_id', $tripdataval['t_vechicle'])->get()->row();
+        $newtripdata[$key]['t_driver_details'] =   $this->db->select('*')->from('drivers')->where('d_id', $tripdataval['t_driver'])->get()->row();
+        $getlocation = $this->db->select('latitude,longitude')->from('positions')->where('v_id', $tripdataval['t_vechicle'])->order_by('id', 'desc')->get()->row();
+        if (!empty($getlocation)) {
+          $newtripdata[$key]['t_current_location'] = $this->getaddress($getlocation->latitude, $getlocation->longitude);
+        }
+      }
+      return $newtripdata;
+    } else {
+      return false;
+    }
+  }
+
   public function getaddress($lat, $lng)
   {
     $google_api_key = $this->config->item('google_api_key');
@@ -73,13 +95,26 @@ class Trips_model extends CI_Model
   }
   public function update_trips($data)
   {
-    if ($data['t_trip_paymentstatus'] == 'completed') {
-      $data['t_trip_pendingamount'] = '0';
-    }
     $newtriparray = array_diff_key($data, ['e_expense_type' => "e_expense_type", 'e_expense_amount' => "e_expense_amount", "e_expense_desc" => "e_expense_desc"]);
 
     $this->db->where('t_id', $this->input->post('t_id'));
     $this->db->update('trips', $newtriparray);
     return $this->input->post('t_id');
+  }
+
+  public function getAllBy($data)
+  {
+    return $this->db->select('*')->from('trips')->where($data)->get()->result_array();
+  }
+
+  public function getTripAllBy($data)
+  {
+    return $this->db->select('*')->from('trips')->where($data)->get()->result();
+  }
+
+  public function update($id,$data)
+  {
+    $this->db->where('t_id', $id);
+    return $this->db->update('trips', $data);
   }
 }

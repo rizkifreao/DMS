@@ -19,6 +19,7 @@ function chek_administrator()
 {
   $ci = &get_instance();
   if (!$ci->ion_auth->in_group('admin')) {
+    $ci->session->set_flashdata('warningmessage', "Anda tidak dapat mengakses halaman tersebut !!!");
     redirect('dashboard');
   }
 }
@@ -251,4 +252,9 @@ function timeAgo($timestamp)
   }
 
   return $go;
+}
+
+function url()
+{
+  return base_url('public');
 }

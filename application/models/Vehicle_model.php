@@ -11,6 +11,10 @@ class vehicle_model extends CI_Model
   {
     return $this->db->select('*')->from('vehicles')->order_by('v_id', 'desc')->get()->result_array();
   }
+  public function getDetail($id)
+  {
+    return $this->db->select('*')->from('vehicles')->where('v_id', $id)->get()->row();
+  }
   public function get_vehicledetails($v_id)
   {
     return $this->db->select('*')->from('vehicles')->where('v_id', $v_id)->get()->result_array();
