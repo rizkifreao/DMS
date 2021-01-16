@@ -70,8 +70,7 @@
             <td><?php echo output($triplists['t_driver_details']->d_name); ?></td>
             <td><?= $triplists['t_trip_fromlocation'] ?> &nbsp; <a href="<?= $triplists['t_trip_tolocation'] ?>" data-toggle="tooltip" target="_blank" title="Klik untuk membuka maps"><i class="icon-map5"></i></a></td>
             <td> <span class="badge <?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'Completed' : 'Pending'; ?> </span> </td>
-            <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'badge-danger' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'OnGoing' : 'Completed'; ?></span>
-              <br><?php echo ($triplists['t_trip_status'] == 'OnGoing' && isset($triplists['t_current_location'])) ? '<span style="font-size: 10px" class="fa fa-location-arrow"> ' . str_replace(',', '<br />', $triplists['t_current_location']) . '</span>' : '-'; ?> </td>
+            <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'badge-danger' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'OnGoing' : 'Completed'; ?></span></td>
             <td class="text-center">
               <div class="list-icons">
                 <div class="dropdown">

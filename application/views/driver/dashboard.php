@@ -102,23 +102,19 @@
             </thead>
             <tbody>
               <?php $count = 1;
-              if ($triplist){
-              foreach ($triplist as $triplists) { ?>
-                <tr>
-                  <td> <?php echo output($count);
-                        $count++; ?></td>
-                  <td> <?php echo ucfirst($triplists['t_customer_id']); ?></td>
-                  <td> <?php echo output($triplists['t_vechicle_details']->v_name) . ' - ' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
-                  <td><?php echo ucfirst($triplists['t_type']); ?></td>
-                  <td><?php $t_trip_fromlocation = explode(',', $triplists['t_trip_fromlocation']);
-                      echo (isset($t_trip_fromlocation[0]) ? $t_trip_fromlocation[0] : '') . '<b><span class="fe fe-arrow-right"></span></b><br>';
-                      $t_trip_tolocation = explode(',', $triplists['t_trip_tolocation']);
-                      echo (isset($t_trip_tolocation[0]) ? $t_trip_tolocation[0] : ''); ?></td>
-                  <td>tgl kirim</td>
-                  <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'Pending') ? 'badge-info' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'Pending') ? 'Pending' : 'Completed'; ?></span>
-                    <br><?php echo ($triplists['t_trip_status'] == 'OnGoing' && isset($triplists['t_current_location'])) ? '<span style="font-size: 10px" class="fa fa-location-arrow"> ' . str_replace(',', '<br />', $triplists['t_current_location']) . '</span>' : '-'; ?> </td>
-                  <td class="text-center">
-                    <!-- <div class="list-icons">
+              if ($triplist) {
+                foreach ($triplist as $triplists) { ?>
+                  <tr>
+                    <td> <?php echo output($count);
+                          $count++; ?></td>
+                    <td> <?php echo ucfirst($triplists['t_customer_id']); ?></td>
+                    <td> <?php echo output($triplists['t_vechicle_details']->v_name) . ' - ' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
+                    <td><?php echo ucfirst($triplists['t_type']); ?></td>
+                    <td><?= $triplists['t_trip_fromlocation'] ?> &nbsp; <a href="<?= $triplists['t_trip_tolocation'] ?>" data-toggle="tooltip" target="_blank" title="Klik untuk membuka maps"><i class="icon-map5"></i></a></td>
+                    <td>tgl kirim</td>
+                    <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'Pending') ? 'badge-info' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'Pending') ? 'Pending' : 'Completed'; ?></span></td>
+                    <td class="text-center">
+                      <!-- <div class="list-icons">
                       <div class="dropdown">
                         <a href="#" class="list-icons-item" data-toggle="dropdown">
                           <i class="icon-menu9"></i>
@@ -130,12 +126,13 @@
                         </div>
                       </div>
                     </div> -->
-                    <div>
-                      <a href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</a>
-                    </div>
-                  </td>
-                </tr>
-              <?php }} ?>
+                      <div>
+                        <a href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</a>
+                      </div>
+                    </td>
+                  </tr>
+              <?php }
+              } ?>
             </tbody>
           </table>
         </div>
