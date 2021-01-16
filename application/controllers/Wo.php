@@ -113,4 +113,12 @@ class Wo extends CI_Controller
       redirect('dashboard','refresh');
     }
   }
+
+  public function test($id="")
+  {
+    $data = $this->workorder_model->getDetail($id);
+    echo "<img src='".base_url('public')."/img/trips_".$id."/".$data->p_km."' width='500' height='600'>". $data->p_km;
+    echo "<img src='".base_url('public')."/img/trips_".$id."/".$data->p_fuel."' width='500' height='600' >". $data->p_fuel;
+    echo "<img src='".base_url('public')."/img/trips_".$id."/".$data->s_fuel."' width='500' height='600' >". $data->s_fuel;
+  }
 }
