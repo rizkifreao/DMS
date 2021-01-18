@@ -44,7 +44,7 @@
             <ul class="media-list">
               <li class="media">
                 <div class="mr-3 position-relative">
-                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
+                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" width="36" height="36" class="rounded-circle" alt="">
                 </div>
 
                 <div class="media-body">
@@ -61,7 +61,7 @@
 
               <li class="media">
                 <div class="mr-3 position-relative">
-                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
+                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" width="36" height="36" class="rounded-circle" alt="">
                 </div>
 
                 <div class="media-body">
@@ -78,7 +78,7 @@
 
               <li class="media">
                 <div class="mr-3">
-                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
+                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" width="36" height="36" class="rounded-circle" alt="">
                 </div>
                 <div class="media-body">
                   <div class="media-title">
@@ -94,7 +94,7 @@
 
               <li class="media">
                 <div class="mr-3">
-                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
+                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" width="36" height="36" class="rounded-circle" alt="">
                 </div>
                 <div class="media-body">
                   <div class="media-title">
@@ -110,7 +110,7 @@
 
               <li class="media">
                 <div class="mr-3">
-                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
+                  <img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" width="36" height="36" class="rounded-circle" alt="">
                 </div>
                 <div class="media-body">
                   <div class="media-title">
@@ -134,7 +134,7 @@
 
       <li class="nav-item dropdown dropdown-user">
         <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-          <img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
+          <img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" class="rounded-circle mr-2" height="34" alt="">
           <span><?= $this->ion_auth->user()->row()->first_name ?></span>
         </a>
 

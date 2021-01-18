@@ -3,6 +3,47 @@
 if (!defined('BASEPATH'))
   exit('No direct script access allowed');
 
+function sendWA($data)
+{
+  $i = substr($data['notelp'],0,1);
+  if ($i == 0) {
+    $payload = [
+      'notelp' => "62" . substr($data['notelp'], 1, 13),
+      'msg' => $data['msg']
+    ];
+    $ch = curl_init('http://157.230.35.21:8082/send');
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      'Content-Type: application/json',
+      'Content-Length: ' . strlen(json_encode($payload))
+    ));
+    $res = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($res);
+  }else{
+    return false;
+  }
+}
+
+function chek_profil()
+{
+  $CI =& get_instance();
+  $user = $CI->ion_auth->user()->row();
+  $driver = $CI->drivers_model->getDetail($user->company);
+  if ($driver->d_is_active == 0) {
+    $data['header_name'] = "Dashboard Driver";
+    $data['drivers'] = $driver;
+    $data['user'] = $user;
+    $CI->load->view('driver/edit_profile',$data);
+    // exit;
+    return false;
+  }{
+    return true;
+  }
+}
+
 function chek_session()
 {
   $ci = &get_instance();

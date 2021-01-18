@@ -1,31 +1,3 @@
-<!-- <h1><?php echo lang('login_heading'); ?></h1>
-<p><?php echo lang('login_subheading'); ?></p>
-
-<div id="infoMessage"><?php echo $message; ?></div>
-
-<?php echo form_open("auth/login"); ?>
-
-<p>
-  <?php echo lang('login_identity_label', 'identity'); ?>
-  <?php echo form_input($identity); ?>
-</p>
-
-<p>
-  <?php echo lang('login_password_label', 'password'); ?>
-  <?php echo form_input($password); ?>
-</p>
-
-<p>
-  <?php echo lang('login_remember_label', 'remember'); ?>
-  <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"'); ?>
-</p>
-
-
-<p><?php echo form_submit('submit', lang('login_submit_btn')); ?></p>
-
-<?php echo form_close(); ?>
-
-<p><a href="forgot_password"><?php echo lang('login_forgot_password'); ?></a></p> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Limitless - Responsive Web Application Kit by Eugene Kopyov</title>
+  <title>DMS</title>
 
   <!-- Global stylesheets -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -75,15 +47,20 @@
 
         <!-- Login form -->
         <!-- <form class="login-form" action="index.html"> -->
-        <?= form_open("auth/login", ["class" => "login-form"]); ?>
+        <?= form_open("login", ["class" => "login-form"]); ?>
+        <input type="hidden" name="method" value="login">
         <div class="card mb-0">
           <div class="card-body">
             <div class="text-center mb-3">
               <i class="icon-reading icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
-              <h5 class="mb-0">Login to your account</h5>
-              <span class="d-block text-muted">Enter your credentials below</span>
+              <h5 class="mb-0">Masuk ke akun anda</h5>
+              <span class="d-block text-muted">Masukkan kredensial Anda di bawah ini</span>
             </div>
-
+            <?php if (isset($message)) { ?>
+              <div class="form-group form-group-feedback form-group-feedback-left">
+                <span class="form-text text-danger"><i class="icon-cancel-circle2 mr-2"></i> <?php echo $message; ?></span>
+              </div>
+            <?php } ?>
             <div class="form-group form-group-feedback form-group-feedback-left">
               <!-- <input type="email" class="form-control" placeholder="Username"> -->
               <?= form_input($identity); ?>
@@ -101,7 +78,11 @@
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
+              <button type="submit" class="btn btn-primary btn-block">Masuk <i class="icon-circle-right2 ml-2"></i></button>
+            </div>
+
+            <div class="form-group">
+              <a href="#" class="btn btn-light btn-block" data-toggle="modal" data-target="#modal-registration">Daftar</a>
             </div>
 
             <div class="text-center">
@@ -110,38 +91,6 @@
           </div>
         </div>
         </form>
-        <!-- /login form -->
-
-
-        <!-- Login form -->
-
-        <!-- /login form -->
-
-
-        <!-- Registration form -->
-
-        <!-- /registration form -->
-
-
-        <!-- Unlock form -->
-
-        <!-- /unlock form -->
-
-
-        <!-- Password recovery form -->
-
-        <!-- /password recovery form -->
-
-
-        <!-- Tabbed form -->
-
-        <!-- /tabbed recovery form -->
-
-
-        <!-- Validation form -->
-
-        <!-- /validation form -->
-
       </div>
       <!-- /content area -->
 
@@ -151,6 +100,71 @@
   </div>
   <!-- /page content -->
 
+  <div id="modal-registration" class="modal fade" tabindex="-1">
+    <!-- <div id="modal-registration" class="modal fade show" tabindex="-1" style="display: block;"> -->
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <!-- Form -->
+        <form class="modal-body" action="<?= base_url('login')?>/register" method="POST">
+          <input type="hidden" name="method" value="daftar">
+          <div class="text-center mb-3">
+            <i class="icon-plus3 icon-2x text-success border-success border-3 rounded-round p-3 mb-3 mt-1"></i>
+            <h5 class="mb-0">Buat Akun Anda</h5>
+            <span class="d-block text-muted">Semua kolom waijb di isi</span>
+          </div>
+
+          <div class="form-group form-group-feedback form-group-feedback-right">
+            <input type="text" class="form-control" name="identity" placeholder="Masukan username" required>
+            <div class="form-control-feedback">
+              <i class="icon-user-plus text-muted"></i>
+            </div>
+          </div>
+
+          <div class="form-group form-group-feedback form-group-feedback-right">
+            <input type="text" class="form-control" name="first_name" placeholder="Masukan Nama Lengkap" required>
+            <div class="form-control-feedback">
+              <i class="icon-user-check text-muted"></i>
+            </div>
+          </div>
+
+          <div class="form-group form-group-feedback form-group-feedback-right">
+            <input type="number" class="form-control" name="phone" placeholder="Nomor Telephone (WA)" required>
+            <div class="form-control-feedback">
+              <i class="icon-phone2 text-muted"></i>
+            </div>
+          </div>
+
+          <div class="form-group form-group-feedback form-group-feedback-right">
+            <input type="email" class="form-control" name="email" placeholder="Masukan email anda" required>
+            <div class="form-control-feedback">
+              <i class="icon-mention text-muted"></i>
+            </div>
+          </div>
+
+          <div class="form-group form-group-feedback form-group-feedback-right">
+            <input type="password" class="form-control" name="password" placeholder="Buat password" required>
+            <div class="form-control-feedback">
+              <i class="icon-user-lock text-muted"></i>
+            </div>
+          </div>
+
+          <div class="form-group form-group-feedback form-group-feedback-right">
+            <input type="password" class="form-control" name="password_confirm" placeholder="Ulangi password" required>
+            <div class="form-control-feedback">
+              <i class="icon-user-lock text-muted"></i>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn bg-teal-400 btn-block">Daftar <i class="icon-circle-right2 ml-2"></i></button>
+        </form>
+        <!-- /form -->
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <script> window.onload = $("#modal-registration").modal('show') </script> -->
 </body>
 
 </html>

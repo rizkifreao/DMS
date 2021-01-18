@@ -2,7 +2,7 @@
 <div class="page-header page-header-light">
   <div class="page-header-content header-elements-md-inline">
     <div class="page-title d-flex">
-      <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"><?php echo (isset($vehicledetails)) ? 'Edit' : 'Tambah' ?> Data Perjalanan</span></h4>
+      <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"><?php echo (isset($vehicledetails)) ? 'Edit' : 'Tambah' ?> Jadwal Pengiriman</span></h4>
       <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
     </div>
   </div>
@@ -34,7 +34,7 @@
   <!-- State saving -->
   <div class="card">
     <div class="card-header header-elements-inline">
-      <h5 class="card-title">Form <?php echo (isset($tripdetails)) ? 'Edit' : 'Tambah' ?> Data Driver</h5>
+      <h5 class="card-title">Form <?php echo (isset($tripdetails)) ? 'Edit' : 'Tambah' ?> Jadwal Pengiriman Barang</h5>
       <div class="header-elements">
         <div class="list-icons">
           <a class="list-icons-item" data-action="collapse"></a>
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <form method="post" id="vehicle_add" action="<?php echo base_url(); ?>trips/<?php echo (isset($tripdetails)) ? 'updatetrips' : 'inserttrips'; ?>">
+    <form method="post" id="vehicle_add" action="<?php echo base_url(); ?>trips/<?php echo (isset($tripdetails)) ? 'updatetrips' : 'inserttrips'; ?>" autocomplete="off">
       <div class="card-body">
         <div class="row">
           <input type="hidden" name="t_id" id="t_id" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_id'] : '' ?>">
@@ -73,9 +73,9 @@
               <select id="t_driver" class="form-control" name="t_driver">
                 <option value="">Pilih Supir</option>
                 <?php foreach ($driverlist as $key => $driverlists) { ?>
-                  <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_driver'] == $driverlists['d_id']) {
+                  <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_driver'] == $driverlists->id) {
                             echo 'selected';
-                          } ?> value="<?php echo output($driverlists['d_id']) ?>"><?php echo output($driverlists['d_name']); ?></option>
+                          } ?> value="<?php echo output($driverlists->id) ?>"><?php echo output($driverlists->first_name); ?></option>
                 <?php  } ?>
               </select>
             </div>
@@ -97,27 +97,28 @@
 
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
-              <label class="form-label">Alamat<span class="form-required">*</span></label>
+              <label class="form-label">Alamat</label>
+              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_fromlocation'] : '' ?>" name="t_trip_fromlocation" id="t_trip_fromlocation" class="form-control" placeholder="Alamat">
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-3">
+            <div class="form-group">
+              <label class="form-label">Link Maps<span class="form-required">*</span></label>
               <div class="input-group">
                 <span class="input-group-prepend">
                   <span class="input-group-text bg-primary border-primary text-white">
                     <a href="https://maps.google.com" target="_blank" style="color: inherit;" data-toggle="tooltip" title="Maps Here !"><i class=" icon-pin-alt"></i></a>
                   </span>
                 </span>
-                <input type="text" class="form-control border-left-0" data-toggle="tooltip" title="Klik tanda untuk membuka maps !" name="t_trip_fromlocation" id="t_trip_fromlocation" placeholder="Alamat" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_fromlocation'] : '' ?>">
+                <input type="text" class="form-control border-left-0" data-toggle="tooltip" title="Klik tanda untuk membuka maps !" name="t_trip_tolocation" id="t_trip_tolocation" placeholder="Link alamat" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_tolocation'] : '' ?>">
               </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="form-group">
-              <label class="form-label">Link maps</label>
-              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_tolocation'] : '' ?>" name="t_trip_tolocation" id="t_trip_tolocation" class="form-control" placeholder="Link alamat maps">
             </div>
           </div>
 
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
-              <label class="form-label">Tanggal Perjalanan<span class="form-required">*</span></label>
+              <label class="form-label">Tanggal Kirim<span class="form-required">*</span></label>
               <div class="input-group">
                 <span class="input-group-prepend">
                   <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -221,7 +222,7 @@
       <input type="hidden" name="t_created_by" id="t_created_by" value="<?= $this->session->get_userdata()['user_id'] ?>">
       <input type="hidden" id="t_created_date" name="t_created_date" value="<?php echo date('Y-m-d h:i:s'); ?>">
       <div class="card-footer text-right">
-        <button type="submit" class="btn btn-primary"> <?php echo (isset($tripdetails)) ? 'Update Trips' : 'Add Trips' ?>
+        <button type="submit" class="btn btn-primary"> Simpan
           <i class="icon-paperplane ml-2"></i>
         </button>
       </div>

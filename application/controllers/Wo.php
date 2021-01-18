@@ -16,6 +16,7 @@ class Wo extends CI_Controller
     $this->load->library('form_validation');
     $this->load->library('session');
     chek_session();
+    chek_profil();
 
     // MAP
     // https://stackoverflow.com/questions/51702406/leaflet-translate-coordinates-into-street-addresses/51702649

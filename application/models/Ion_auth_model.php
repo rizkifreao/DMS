@@ -844,13 +844,16 @@ class Ion_auth_model extends CI_Model
 
 		// Users table.
 		$data = [
-			$this->identity_column => $identity,
+			// $this->identity_column => $identity,
+			'username' => $identity,
 			'password' => $password,
 			'email' => $email,
 			'ip_address' => $ip_address,
-			'created_on' => time(),
+			// 'created_on' => time(),
 			'active' => ($manual_activation === FALSE ? 1 : 0)
 		];
+		// echo json_encode($data);
+		// exit;
 
 		// filter out any data passed that doesnt have a matching column in the users table
 		// and merge the set user data and the additional data
@@ -2802,5 +2805,10 @@ class Ion_auth_model extends CI_Model
 			$this->trigger_events(['post_sha1_password_migration', 'post_sha1_password_migration_unsuccessful']);
 			return FALSE;
 		}
+	}
+
+	public function getDetail($data)
+	{
+		return $this->db->select('*')->from('users')->where($data)->get()->row();
 	}
 }

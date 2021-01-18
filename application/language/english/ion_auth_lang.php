@@ -38,12 +38,19 @@ $lang['activation_email_successful']         = 'Activation Email Sent. Please ch
 $lang['activation_email_unsuccessful']       = 'Unable to Send Activation Email';
 $lang['deactivate_current_user_unsuccessful']= 'You cannot De-Activate your self.';
 
+// // Login / Logout
+// $lang['login_successful']                    = 'Logged In Successfully';
+// $lang['login_unsuccessful']                  = 'Incorrect Login';
+// $lang['login_unsuccessful_not_active']       = 'Account is inactive';
+// $lang['login_timeout']                       = 'Temporarily Locked Out.  Try again later.';
+// $lang['logout_successful']                   = 'Logged Out Successfully';
+
 // Login / Logout
-$lang['login_successful']                    = 'Logged In Successfully';
-$lang['login_unsuccessful']                  = 'Incorrect Login';
-$lang['login_unsuccessful_not_active']       = 'Account is inactive';
-$lang['login_timeout']                       = 'Temporarily Locked Out.  Try again later.';
-$lang['logout_successful']                   = 'Logged Out Successfully';
+$lang['login_successful']              = 'Log In Berhasil';
+$lang['login_unsuccessful']              = 'Log In Gagal';
+$lang['login_unsuccessful_not_active']              = 'Akun Tidak Aktif';
+$lang['login_timeout']                = 'Sementara Terkunci. Coba Beberapa Saat Lagi.';
+$lang['logout_successful']              = 'Log Out Berhasil';
 
 // Account Changes
 $lang['update_successful']                   = 'Account Information Successfully Updated';

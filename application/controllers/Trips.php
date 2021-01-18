@@ -29,7 +29,7 @@ class Trips extends CI_Controller
   {
     $data['customerlist'] = $this->trips_model->getall_customer();
     $data['vechiclelist'] = $this->trips_model->getall_vechicle();
-    $data['driverlist'] = $this->trips_model->getall_driverlist();
+    $data['driverlist'] = $this->ion_auth->users(2)->result();
     $this->template->template_render('trips/trip-form', $data);
   }
   public function inserttrips()

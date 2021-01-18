@@ -5,7 +5,7 @@
     <div class="card-body">
       <div class="media">
         <div class="mr-3">
-          <a href="#"><img src="<?= base_url('public') ?>/global_assets/images/placeholders/placeholder.jpg" width="38" height="38" class="rounded-circle" alt=""></a>
+          <a href="#"><img src="<?= base_url('public') ?>/global_assets/images/placeholders/User-Avatar-Transparent.png" width="auto" height="38" class="rounded-circle" alt=""></a>
         </div>
 
         <div class="media-body">

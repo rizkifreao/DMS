@@ -20,4 +20,8 @@ class Drivers_model extends CI_Model
     $this->db->where('d_id', $this->input->post('d_id'));
     return $this->db->update('drivers', $this->input->post());
   }
+  public function getDetail($d_id)
+  {
+    return $this->db->select('*')->from('drivers')->where('d_id', $d_id)->get()->row();
+  }
 }

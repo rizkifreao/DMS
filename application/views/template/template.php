@@ -143,7 +143,7 @@
 
         <div class="navbar-collapse collapse" id="navbar-footer">
           <span class="navbar-text">
-            &copy; 2020. <a href="#">Drivers Management Sistem</a> by <a href="#" target="_blank">Developers</a>
+            &copy; 2020. <a href="#">Drivers Management Sistem</a> by <a href="https://github.com/rizkifreao" target="_blank">Developers</a>
           </span>
         </div>
       </div>
