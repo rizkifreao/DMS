@@ -48,13 +48,13 @@ class Wo extends CI_Controller
   {
     $id = $this->input->post('id');
     $gps = $this->input->post('koordinat');
-    // $this->trips_model->update($id, ['t_trip_status' => "OnGoing", "t_trip_fromlat"=>$gps]);
+    $this->trips_model->update($id, ['t_trip_status' => "OnGoing", "t_trip_fromlat"=>$gps]);
     $this->session->set_flashdata('successmessage', "Berhasil mengambil pengiriman anda");
     $user = $this->ion_auth->user()->row();
     $detwo = $this->trips_model->getDetail($id);
     sendWA([
-      'notelp' => "083101194384",
-      // 'notelp'=>$this->ion_auth->user(1)->row()->phone,
+      // 'notelp' => "083101194384",
+      'notelp'=>$this->ion_auth->user(1)->row()->phone,
       'msg' => "*Informasi*\nDriver " . $user->first_name . " telah mengambil order pengiriman dengan detail sebagai berikut :\n Pelanggan : " . $detwo->t_customer_id . "\nAlamat : " . $detwo->t_trip_fromlocation,
       'loc' => $gps
     ]);
