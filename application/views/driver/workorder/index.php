@@ -82,7 +82,7 @@
                       </div>
                     </div> -->
                       <div>
-                        <a href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</a>
+                        <a href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Selesai</a>
                       </div>
                     </td>
                   </tr>

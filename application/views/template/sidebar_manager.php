@@ -50,7 +50,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= base_url('laporan') ?>" class="nav-link">
+        <a href="<?= base_url('wo') ?>" class="nav-link">
           <i class="icon-stack"></i>
           <span>
             Laporan

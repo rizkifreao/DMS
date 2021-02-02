@@ -30,6 +30,37 @@ class Wo extends CI_Controller
     $this->template->template_render('workorder/index', $res);
   }
 
+  public function get_trip()
+  {
+    $id = $this->input->get('id');
+    $data = $this->trips_model->getAllBy(['t_id' => $id]);
+    $res['tripdetails'] = $this->trips_model->get_tripdetails($id);
+    $res['vechicle'] = $this->vehicle_model->getDetail($data[0]['t_vechicle']);
+    $res['wo'] = $this->workorder_model->getAllBy(['t_id' => $id]);
+    $res['header_name'] = "Proses Trip";
+    echo json_encode($res);
+    // echo var_dump($res);
+    // echo json_encode($this->vehicle_model->getDetail(1)->v_name);
+    // $this->template->template_render('workorder/proses', $res);
+  }
+
+  public function take_wo()
+  {
+    $id = $this->input->post('id');
+    $gps = $this->input->post('koordinat');
+    // $this->trips_model->update($id, ['t_trip_status' => "OnGoing", "t_trip_fromlat"=>$gps]);
+    $this->session->set_flashdata('successmessage', "Berhasil mengambil pengiriman anda");
+    $user = $this->ion_auth->user()->row();
+    $detwo = $this->trips_model->getDetail($id);
+    sendWA([
+      'notelp' => "083101194384",
+      // 'notelp'=>$this->ion_auth->user(1)->row()->phone,
+      'msg' => "*Informasi*\nDriver " . $user->first_name . " telah mengambil order pengiriman dengan detail sebagai berikut :\n Pelanggan : " . $detwo->t_customer_id . "\nAlamat : " . $detwo->t_trip_fromlocation,
+      'loc' => $gps
+    ]);
+    redirect('wo', 'refresh');
+  }
+
   public function proses_trip($id)
   {
     $data = $this->trips_model->getAllBy(['t_id'=> $id]);
@@ -108,10 +139,18 @@ class Wo extends CI_Controller
       $data['b_fuel'] = $post['b_fuel'];
       $data['location'] = $post['location'];
       $data['pengeluaran'] = $post['pengeluaran'];
-      $this->trips_model->update($post['t_id'],['t_trip_status' => "OnGoing"]);
+      $this->trips_model->update($post['t_id'],['t_trip_status' => "Completed"]);
       $this->workorder_model->add($data);
-      $this->session->set_flashdata('successmessage', "Sukses menyimpan data");
-      redirect('dashboard','refresh');
+      $user = $this->ion_auth->user()->row();
+      $detwo = $this->trips_model->getDetail($post['t_id']);
+      sendWA([
+        // 'notelp' => "083101194384",
+        'notelp' => $this->ion_auth->user(1)->row()->phone,
+        'msg' => "*Notifikasi*\n" . $user->first_name . " telah selesai melakukan pengiriman dengan detail sebagai berikut :\n Trip ID : ". $post['t_id']."\nPelanggan : " . $detwo->t_customer_id . "\nAlamat : " . $detwo->t_trip_fromlocation,
+        'loc' => $post['location']
+      ]);
+      $this->session->set_flashdata('successmessage', "Data pengiriman berhasil di perbaharui");
+      redirect('wo','refresh');
     }
   }
 

@@ -18,15 +18,24 @@ class Dashboard extends CI_Controller
   public function index()
   {
     $uid = $this->session->get_userdata()['user_id'];
-    $data['header_name'] = "Dashboard Driver";
     if($this->ion_auth->in_group('admin')){
+      $data['header_name'] = "Dashboard Admin";
       $data['iechart'] = $this->dashboard_model->get_iechartdata();
       $data['dashboard'] = $this->dashboard_model->getdashboard_info();
       $data['vechicle_currentlocation'] = $this->dashboard_model->get_vechicle_currentlocation();
       $data['vechicle_status'] = $this->dashboard_model->getvechicle_status();
       $this->template->template_render('dashboard', $data);
+    } else if ($this->ion_auth->in_group('manager')) {
+      $data['header_name'] = "Dashboard Manager";
+      $data['iechart'] = $this->dashboard_model->get_iechartdata();
+      $data['dashboard'] = $this->dashboard_model->getdashboard_info();
+      $data['vechicle_currentlocation'] = $this->dashboard_model->get_vechicle_currentlocation();
+      $data['vechicle_status'] = $this->dashboard_model->getvechicle_status();
+      // $this->template->template_render('dashboard', $data);
+      echo json_encode($data);
     }else{
       if(chek_profil()){
+        $data['header_name'] = "Dashboard Driver";
         $data['triplist'] = $this->trips_model->getAllBy(['t_driver' => $uid]);
         $data['tot_trips'] = count($this->trips_model->getAllBy(['t_driver' => $uid]));
         $data['trip_complete'] = count($this->trips_model->getAllBy(['t_driver' => $uid, 't_trip_status' => 'Completed']));
@@ -35,11 +44,7 @@ class Dashboard extends CI_Controller
         $data['triplist'] = $this->trips_model->getall_trips_by(['t_driver' => $uid, 't_trip_status' => 'Pending']);
         $this->template->template_render('dashboard', $data);
       }
-    }
-    
-    // echo var_dump($data);
-    // echo json_encode($this->trips_model->getAllBy(['t_driver' => $uid]));
-    
+    }    
   }
   public function iechart()
   {
@@ -52,7 +57,13 @@ class Dashboard extends CI_Controller
 
   public function get()
   {
-    chek_profil();
+    sendWA([
+      // 'notelp' => "081282857386",
+      // 'notelp' => "081222753260",
+      'notelp' => "083101194384",
+      // 'notelp' => "08994328989",
+      'msg' => "Hello"
+    ]);
 
   }
 
@@ -67,7 +78,7 @@ class Dashboard extends CI_Controller
     if ($verify) {
       echo 'Password Verified!';
     } else {
-      echo 'Incorrect Password!';
+      echo 'Incorrect Password!  or 00000000000-111111111@g.us';
     } 
   }
 }

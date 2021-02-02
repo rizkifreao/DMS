@@ -126,7 +126,7 @@
           </div>
         </div>
         <!-- END CARD BODY -->
-        <input type="hidden" name="location" id="koordinat">
+        <input type="hidden" name="location" id="lokasi">
         <div class="card-footer d-flex justify-content-between align-items-center bg-teal-400 border-top-0">
           <button type="submit" class="btn bg-transparent text-white border-white border-2"> Batal
             <button type="submit" class="btn btn-outline bg-white text-white border-white border-2"> Simpan
@@ -141,22 +141,13 @@
 
 <script>
   var x = document.getElementById("demo");
-
-  window.onload = getLocation();
-
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-  }
-
-  function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude +
-      "<br>Longitude: " + position.coords.longitude);
-    $("#koordinat").val(position.coords.latitude + "," + position.coords.longitude)
-    // x.innerHTML = "Latitude: " + position.coords.latitude +
-    //   "<br>Longitude: " + position.coords.longitude;
-  }
+  $("#lokasi").val(latlong)
+  // function showPosition(position) {
+  //   latlong = position.coords.latitude + "," + position.coords.longitude
+  //   console.log("Latitude: " + position.coords.latitude +
+  //     "<br>Longitude: " + position.coords.longitude);
+  //   $("#koordinat").val(position.coords.latitude + "," + position.coords.longitude)
+  //   // x.innerHTML = "Latitude: " + position.coords.latitude +
+  //   //   "<br>Longitude: " + position.coords.longitude;
+  // }
 </script>

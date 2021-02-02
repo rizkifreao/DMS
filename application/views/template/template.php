@@ -52,6 +52,29 @@
 
 <body>
   <script>
+    window.onload = getLocation();
+
+    var latlong = ""
+    window.latlong = ""
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      latlong = position.coords.latitude + "," + position.coords.longitude
+      window.latlong = position.coords.latitude + "," + position.coords.longitude
+      // console.log("Latitude: " + position.coords.latitude +
+      //   "<br>Longitude: " + position.coords.longitude);
+      // $("#koordinat").val(position.coords.latitude + "," + position.coords.longitude)
+      // x.innerHTML = "Latitude: " + position.coords.latitude +
+      //   "<br>Longitude: " + position.coords.longitude;
+    }
+
     Noty.overrideDefaults({
       theme: 'limitless',
       layout: 'topRight',

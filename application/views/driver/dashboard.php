@@ -127,7 +127,8 @@
                       </div>
                     </div> -->
                       <div>
-                        <a href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</a>
+                        <!-- <button href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</button> -->
+                        <button id="btn-proses" data-id="<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400""><i class=" icon-paperplane mr-2"></i> Ambil</button>
                       </div>
                     </td>
                   </tr>
@@ -137,3 +138,88 @@
           </table>
         </div>
       </div>
+
+      <div id="proses_wo" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-info">
+              <h6 class="modal-title">Proses Pengiriman</h6>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form action="<?= base_url('wo') ?>/take_wo" class="form-horizontal" method="POST">
+              <div class="modal-body">
+                <h6 class="font-weight-semibold">Data Pengiriman</h6>
+
+                <input type="hidden" id="wo_id" name="id">
+                <input type="hidden" id="koordinat" name="koordinat">
+
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Pelanggan</label>
+                  <div class="col-sm-9">
+                    <input type="text" id="pelanggan" class="form-control" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Kendaraan</label>
+                  <div class="col-sm-9">
+                    <input type="text" id="kendaraan" class="form-control" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Alamat</label>
+                  <div class="col-sm-9">
+                    <div class="input-group">
+                      <span class="input-group-prepend">
+                        <span class="input-group-text bg-primary border-primary text-white">
+                          <a href="https://goo.gl/maps/g9RRhGzAYQBR5SQf6" id="maps" target="_blank" style="color: inherit;" data-toggle="tooltip" title="Klik tanda untuk membuka maps !"><i class=" icon-map5"></i></a>
+                        </span>
+                      </span>
+                      <textarea type="text" class="form-control border-left-0" data-toggle="tooltip" id="alamat" disabled></textarea>
+                    </div>
+                    <span>Klik icon untuk membuka aplikasi map</span>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Tipe Pengiriman</label>
+                  <div class="col-sm-9">
+                    <input type="text" id="tipe_pengiriman" class="form-control" disabled>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn bg-info">Proses</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <script>
+        base_url = '<?= base_url() ?>'
+        $('#btn-proses').on('click', function() {
+          var id = $(this).attr('data-id')
+          $.ajax({
+            url: base_url + 'wo/get_trip?id=' + id,
+            success: function(res) {
+              data = JSON.parse(res)
+              $("#wo_id").val(id)
+              $("#pelanggan").val(data.tripdetails[0].t_customer_id)
+              $("#maps").href = data.tripdetails[0].t_trip_tolocation
+              $("#kendaraan").val(data.vechicle.v_name)
+              $("#alamat").text(data.tripdetails[0].t_trip_fromlocation)
+              $("#tipe_pengiriman").val(data.tripdetails[0].t_type)
+              $("#koordinat").val(latlong)
+              console.log(latlong);
+            }
+          })
+          $('#proses_wo').modal('show')
+        });
+      </script>

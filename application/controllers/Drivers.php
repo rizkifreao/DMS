@@ -18,6 +18,8 @@ class Drivers extends CI_Controller
 
   public function index()
   {
+
+    $data['user'] = $this->drivers_model->getall_drivers();
     $data['driverslist'] = $this->drivers_model->getall_drivers();
     $this->template->template_render('driver/index', $data);
   }

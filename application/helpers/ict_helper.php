@@ -9,7 +9,8 @@ function sendWA($data)
   if ($i == 0) {
     $payload = [
       'notelp' => "62" . substr($data['notelp'], 1, 13),
-      'msg' => $data['msg']
+      'msg' => $data['msg'],
+      'loc' => $data['loc']
     ];
     $ch = curl_init('http://157.230.35.21:8082/send');
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");

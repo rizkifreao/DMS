@@ -107,6 +107,11 @@ class Trips_model extends CI_Model
     return $this->db->select('*')->from('trips')->where($data)->get()->result_array();
   }
 
+  public function getDetail($id)
+  {
+    return $this->db->select('*')->from('trips')->where('t_id',$id)->get()->row();
+  }
+
   public function getTripAllBy($data)
   {
     return $this->db->select('*')->from('trips')->where($data)->get()->result();
