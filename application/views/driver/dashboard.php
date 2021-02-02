@@ -128,7 +128,7 @@
                     </div> -->
                       <div>
                         <!-- <button href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</button> -->
-                        <button id="btn-proses" data-id="<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400""><i class=" icon-paperplane mr-2"></i> Ambil</button>
+                        <button id="btn-proses" data-id="<?php echo output($triplists['t_id']); ?>" onclick="getDetail(this)" class="btn btn-sm bg-teal-400""><i class=" icon-paperplane mr-2"></i> Ambil</button>
                       </div>
                     </td>
                   </tr>
@@ -204,8 +204,12 @@
 
       <script>
         base_url = '<?= base_url() ?>'
-        $('#btn-proses').on('click', function() {
-          var id = $(this).attr('data-id')
+        // $('#btn-proses').on('click', function() {
+
+        // });
+
+        function getDetail(el) {
+          var id = $(el).attr('data-id')
           $.ajax({
             url: base_url + 'wo/get_trip?id=' + id,
             success: function(res) {
@@ -221,5 +225,5 @@
             }
           })
           $('#proses_wo').modal('show')
-        });
+        }
       </script>
