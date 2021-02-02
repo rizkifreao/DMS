@@ -59,11 +59,11 @@
         </ul>
       </li>
       <li class="nav-item nav-item-submenu">
-        <a href="#" class="nav-link"><i class="icon-stack"></i> <span>Trips</span></a>
+        <a href="#" class="nav-link"><i class="icon-stack"></i> <span>Pengiriman Barang</span></a>
 
         <ul class="nav nav-group-sub" data-submenu-title="Starter kit">
-          <li class="nav-item"><a href="<?= base_url('Trips') ?>" class="nav-link">Trips Management</a></li>
-          <li class="nav-item"><a href="<?= base_url('Trips/addtrips') ?>" class="nav-link">Tambah Trips</a></li>
+          <li class="nav-item"><a href="<?= base_url('Trips') ?>" class="nav-link">Manajemen Pengiriman</a></li>
+          <li class="nav-item"><a href="<?= base_url('Trips/addtrips') ?>" class="nav-link">Buat Pengiriman</a></li>
         </ul>
       </li>
       <li class="nav-item">
