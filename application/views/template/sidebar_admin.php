@@ -33,7 +33,7 @@
         <div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i>
       </li>
       <li class="nav-item">
-        <a href="index.html" class="nav-link <?= ($this->uri->segment(1) == 'dashboard') ? 'active' : '' ?>">
+        <a href="<?=base_url('dashboard')?>" class="nav-link <?= ($this->uri->segment(1) == 'dashboard') ? 'active' : '' ?>">
           <i class="icon-home4"></i>
           <span>
             Dashboard
@@ -67,13 +67,12 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a href="changelog.html" class="nav-link">
+        <a href="<?=base_url('laporan')?>" class="nav-link">
           <i class="icon-list-unordered"></i>
-          <span>Changelog</span>
+          <span>Laporan</span>
           <span class="badge bg-blue-400 align-self-center ml-auto">2.2</span>
         </a>
       </li>
-      <li class="nav-item"><a href="../../../RTL/default/full/index.html" class="nav-link"><i class="icon-width"></i> <span>RTL version</span></a></li>
       <!-- /main -->
     </ul>
   </div>

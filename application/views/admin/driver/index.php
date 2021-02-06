@@ -37,7 +37,7 @@
       <h5 class="card-title">Tabel Data Driver</h5>
       <div class="header-elements">
         <div class="list-icons">
-          <a href="<?php echo base_url(); ?>drivers/adddrivers" class="btn btn-primary btn-sm">Tambah Driver Baru</a>
+          <!-- <a href="<?php echo base_url(); ?>drivers/adddrivers" class="btn btn-primary btn-sm">Tambah Driver Baru</a> -->
           <a class="list-icons-item" data-action="collapse"></a>
           <a class="list-icons-item" data-action="reload"></a>
         </div>

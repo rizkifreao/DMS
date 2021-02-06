@@ -67,7 +67,7 @@
             <td> <?php echo $triplists['t_customer_id']; ?></td>
             <td> <?php echo output($triplists['t_vechicle_details']->v_name) . '-' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
             <td><?php echo ucfirst($triplists['t_type']); ?></td>
-            <td><?php echo output($triplists['t_driver_details']->d_name); ?></td>
+            <td><?php echo output($triplists['t_driver_details']->first_name); ?></td>
             <td><?= $triplists['t_trip_fromlocation'] ?> &nbsp; <a href="<?= $triplists['t_trip_tolocation'] ?>" data-toggle="tooltip" target="_blank" title="Klik untuk membuka maps"><i class="icon-map5"></i></a></td>
             <td> <span class="badge <?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'Completed' : 'Pending'; ?> </span> </td>
             <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'badge-danger' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'OnGoing' : 'Completed'; ?></span></td>

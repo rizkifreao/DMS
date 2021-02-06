@@ -39,7 +39,8 @@ class Trips_model extends CI_Model
         $newtripdata[$key] = $tripdataval;
         $newtripdata[$key]['t_customer_details'] =  $this->db->select('*')->from('customers')->where('c_id', $tripdataval['t_customer_id'])->get()->row();
         $newtripdata[$key]['t_vechicle_details'] =  $this->db->select('*')->from('vehicles')->where('v_id', $tripdataval['t_vechicle'])->get()->row();
-        $newtripdata[$key]['t_driver_details'] =   $this->db->select('*')->from('drivers')->where('d_id', $tripdataval['t_driver'])->get()->row();
+        $newtripdata[$key]['t_driver_details'] =   $this->db->select('*')->from('users')->where('id', $tripdataval['t_driver'])->get()->row();
+        // $newtripdata[$key]['t_driver_details'] =   $this->db->select('*')->from('drivers')->where('d_id', $tripdataval['t_driver'])->get()->row();
         $getlocation = $this->db->select('latitude,longitude')->from('positions')->where('v_id', $tripdataval['t_vechicle'])->order_by('id', 'desc')->get()->row();
         if (!empty($getlocation)) {
           $newtripdata[$key]['t_current_location'] = $this->getaddress($getlocation->latitude, $getlocation->longitude);
@@ -60,7 +61,7 @@ class Trips_model extends CI_Model
         $newtripdata[$key] = $tripdataval;
         $newtripdata[$key]['t_customer_details'] =  $this->db->select('*')->from('customers')->where('c_id', $tripdataval['t_customer_id'])->get()->row();
         $newtripdata[$key]['t_vechicle_details'] =  $this->db->select('*')->from('vehicles')->where('v_id', $tripdataval['t_vechicle'])->get()->row();
-        $newtripdata[$key]['t_driver_details'] =   $this->db->select('*')->from('drivers')->where('d_id', $tripdataval['t_driver'])->get()->row();
+        $newtripdata[$key]['t_driver_details'] =   $this->db->select('*')->from('users')->where('id', $tripdataval['t_driver'])->get()->row();
         $getlocation = $this->db->select('latitude,longitude')->from('positions')->where('v_id', $tripdataval['t_vechicle'])->order_by('id', 'desc')->get()->row();
         if (!empty($getlocation)) {
           $newtripdata[$key]['t_current_location'] = $this->getaddress($getlocation->latitude, $getlocation->longitude);
