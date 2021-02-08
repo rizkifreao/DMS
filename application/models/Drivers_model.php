@@ -10,6 +10,8 @@ class Drivers_model extends CI_Model
   public function getall_drivers()
   {
     return $this->db->select('*')->from('drivers')->order_by('d_id', 'desc')->get()->result_array();
+    // $datadriver =  $this->db->select('*')->from('users')->order_by('d_id', 'desc')->get()->result();
+
   }
   public function get_driverdetails($d_id)
   {

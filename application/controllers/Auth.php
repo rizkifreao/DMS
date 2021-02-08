@@ -344,7 +344,8 @@ class Auth extends CI_Controller
     if ($activation) {
       // redirect them to the auth page
       $this->session->set_flashdata('message', $this->ion_auth->messages());
-      redirect("auth", 'refresh');
+      $this->session->set_flashdata('successmessage', 'Akun berhasil diaktifkan..');
+      redirect("drivers", 'refresh');
     } else {
       // redirect them to the forgot password page
       $this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -359,41 +360,42 @@ class Auth extends CI_Controller
    */
   public function deactivate($id = NULL)
   {
-    if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-      // redirect them to the home page because they must be an administrator to view this
-      show_error('You must be an administrator to view this page.');
-    }
+    // if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+    //   // redirect them to the home page because they must be an administrator to view this
+    //   show_error('You must be an administrator to view this page.');
+    // }
 
-    $id = (int)$id;
+    // $id = (int)$id;
 
-    $this->load->library('form_validation');
-    $this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
-    $this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
+    // $this->load->library('form_validation');
+    // $this->form_validation->set_rules('confirm', $this->lang->line('deactivate_validation_confirm_label'), 'required');
+    // $this->form_validation->set_rules('id', $this->lang->line('deactivate_validation_user_id_label'), 'required|alpha_numeric');
 
-    if ($this->form_validation->run() === FALSE) {
-      // insert csrf check
-      $this->data['csrf'] = $this->_get_csrf_nonce();
-      $this->data['user'] = $this->ion_auth->user($id)->row();
-      $this->data['identity'] = $this->config->item('identity', 'ion_auth');
+    // if ($this->form_validation->run() === FALSE) {
+    //   // insert csrf check
+    //   $this->data['csrf'] = $this->_get_csrf_nonce();
+    //   $this->data['user'] = $this->ion_auth->user($id)->row();
+    //   $this->data['identity'] = $this->config->item('identity', 'ion_auth');
 
-      $this->_render_page('auth' . DIRECTORY_SEPARATOR . 'deactivate_user', $this->data);
-    } else {
-      // do we really want to deactivate?
-      if ($this->input->post('confirm') == 'yes') {
-        // do we have a valid request?
-        if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
-          show_error($this->lang->line('error_csrf'));
-        }
+    //   $this->_render_page('auth' . DIRECTORY_SEPARATOR . 'deactivate_user', $this->data);
+    // } else {
+    //   // do we really want to deactivate?
+    //   if ($this->input->post('confirm') == 'yes') {
+    //     // do we have a valid request?
+    //     if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
+    //       show_error($this->lang->line('error_csrf'));
+    //     }
 
-        // do we have the right userlevel?
-        if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
-          $this->ion_auth->deactivate($id);
-        }
-      }
-
+    //     // do we have the right userlevel?
+    //     if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
+    //       $this->ion_auth->deactivate($id);
+    //     }
+    //   }
+      $this->ion_auth->deactivate($id);
+      $this->session->set_flashdata('successmessage', 'Akun Berhasil di non aktifkan..');
       // redirect them back to the auth page
-      redirect('auth', 'refresh');
-    }
+      redirect('drivers', 'refresh');
+    // }
   }
 
   /**

@@ -18,10 +18,10 @@ class Drivers extends CI_Controller
 
   public function index()
   {
-
-    $data['user'] = $this->drivers_model->getall_drivers();
-    $data['driverslist'] = $this->drivers_model->getall_drivers();
+        
+    $data['driverslist'] = $this->ion_auth->users('drivers')->result();
     $this->template->template_render('driver/index', $data);
+    // echo json_encode($this->drivers_model->getDetail(2));
   }
   
   public function adddrivers()

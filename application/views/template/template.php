@@ -30,6 +30,7 @@
   <script src="<?= base_url('public/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js') ?>"></script>
   <script src="<?= base_url('public/global_assets/js/plugins/ui/moment/moment.min.js') ?>"></script>
   <script src="<?= base_url('public/global_assets/js/plugins/pickers/daterangepicker.js') ?>"></script>
+  <script src="<?= base_url('public') ?>/global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/forms/selects/select2.min.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/notifications/jgrowl.min.js"></script>
@@ -52,6 +53,7 @@
 
 <body>
   <script>
+    var base_url = "<?= base_url() ?>"
     window.onload = getLocation();
 
     var latlong = ""

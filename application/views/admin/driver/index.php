@@ -60,17 +60,19 @@
       </thead>
       <tbody>
         <?php $count = 1;
-        foreach ($driverslist as $driverslists) { ?>
+        foreach ($driverslist as $val) {
+          $user_detail = $this->drivers_model->getDetail($val->company);
+        ?>
           <tr>
             <td> <?php echo output($count);
                   $count++; ?></td>
-            <td> <?php echo output($driverslists['d_name']); ?></td>
-            <td> <?php echo output($driverslists['d_mobile']); ?></td>
-            <td><?php echo output($driverslists['d_address']); ?></td>
-            <td><?php echo output($driverslists['d_licenseno']); ?></td>
-            <td><?php echo output($driverslists['d_license_expdate']); ?></td>
-            <td><?php echo output($driverslists['d_doj']); ?></td>
-            <td> <span class="badge <?php echo ($driverslists['d_is_active'] == '1') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($driverslists['d_is_active'] == '1') ? 'Aktif' : 'Non Aktif'; ?></span> </td>
+            <td> <?= $val->first_name; ?></td>
+            <td> <?= $val->phone; ?></td>
+            <td> <?= $user_detail->d_address; ?></td>
+            <td> <?= $user_detail->d_licenseno; ?></td>
+            <td> <?= $user_detail->d_license_expdate; ?></td>
+            <td> <?= $user_detail->d_doj; ?></td>
+            <td> <a onclick="updateStat(this)" data-id="<?= $val->id ?>" data-stat="<?= $val->active ?>" href="#"><span class="badge <?php echo ($val->active == '1') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($val->active == '1') ? 'Aktif' : 'Non Aktif'; ?></span></a> </td>
             <td class="text-center">
               <div class="list-icons">
                 <div class="dropdown">
@@ -79,7 +81,7 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a href="<?php echo base_url(); ?>drivers/editdriver/<?php echo output($driverslists['d_id']); ?>" class="dropdown-item"><i class="icon-pencil"></i>Ubah</a>
+                    <a href="#" class="dropdown-item"><i class="icon-pencil"></i>Ubah</a>
                     <a href="#" class="dropdown-item"><i class="icon-eraser2"></i> Hapus</a>
                   </div>
                 </div>
@@ -92,3 +94,42 @@
   </div>
   <!-- /state saving -->
 </div>
+
+<script>
+  function updateStat(e) {
+    var val = $(e).attr('data-id')
+    var stat = $(e).attr('data-stat')
+    var link = $(this).attr('href')
+    var swalInit = swal.mixin({
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn btn-light'
+    });
+    console.log(stat);
+    if (stat == '1') {
+      swalInit({
+        title: 'Are you sure?',
+        text: "Non-aktifkan akun ini !",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes !',
+        cancelButtonText: 'No, cancel!',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false
+      }).then(function(result) {
+        if (result.value) {
+          // swalInit(
+          //   'Deleted!',
+          //   'Your file has been deleted.',
+          //   'success'
+          // );
+          window.location = base_url + "auth/deactivate/" + val
+        }
+      });
+      // window.location = base_url + "auth/inactive/" + val
+    } else {
+      window.location = base_url + "auth/activate/" + val
+    }
+  }
+</script>

@@ -55,7 +55,7 @@
 
         <ul class="nav nav-group-sub" data-submenu-title="Themes">
           <li class="nav-item"><a href="<?= base_url('drivers') ?>" class="nav-link">Managemen Driver</a></li>
-          <li class="nav-item"><a href="<?= base_url('drivers/adddrivers') ?>" class="nav-link">Tambah Data</a></li>
+          <!-- <li class="nav-item"><a href="<?= base_url('drivers/adddrivers') ?>" class="nav-link">Tambah Data</a></li> -->
         </ul>
       </li>
       <li class="nav-item nav-item-submenu">
