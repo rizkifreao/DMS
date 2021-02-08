@@ -37,7 +37,7 @@
           <i class="icon-home4"></i>
           <span>
             Dashboard
-            <span class="d-block font-weight-normal opacity-50">Drivers</span>
+            <span class="d-block font-weight-normal opacity-50">Manager</span>
           </span>
         </a>
       </li>

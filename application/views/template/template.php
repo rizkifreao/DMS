@@ -42,7 +42,7 @@
   <script src="<?= base_url('public') ?>/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
 
   <script src="<?= base_url('public/assets/js/app.js') ?>"></script>
-  <!-- <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script> -->
+  <script src="<?= base_url('public/global_assets/js/demo_pages/dashboard.js') ?>"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/datatables_basic.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/picker_date.js"></script>
   <script src="<?= base_url('public') ?>/global_assets/js/demo_pages/form_inputs.js"></script>
