@@ -51,13 +51,13 @@
           <div class="col-sm-6 col-md-3">
             <label class="form-label">Nama Pelanggan<span class="form-required">*</span></label>
             <div class="form-group">
-              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_customer_id'] : '' ?>" name="t_customer_id" id="t_customer_id" class="form-control" placeholder="Nama Pelanggan">
+              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_customer_id'] : '' ?>" name="t_customer_id" id="t_customer_id" class="form-control" required placeholder="Nama Pelanggan">
             </div>
           </div>
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Kendaraan<span class="form-required">*</span></label>
-              <select id="t_vechicle" class="form-control" name="t_vechicle">
+              <select id="t_vechicle" class="form-control" required name="t_vechicle">
                 <option value="">Pilih Kendaraan</option>
                 <?php foreach ($vechiclelist as $key => $vechiclelists) { ?>
                   <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_vechicle'] == $vechiclelists['v_id']) {
@@ -70,7 +70,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Supir<span class="form-required">*</span></label>
-              <select id="t_driver" class="form-control" name="t_driver">
+              <select id="t_driver" class="form-control" required name="t_driver">
                 <option value="">Pilih Supir</option>
                 <?php foreach ($driverlist as $key => $driverlists) { ?>
                   <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_driver'] == $driverlists->id) {
@@ -83,7 +83,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Trip Type<span class="form-required">*</span></label>
-              <select id="t_type" class="form-control" name="t_type">
+              <select id="t_type" class="form-control" required name="t_type">
                 <option value="">Select Trip Type</option>
                 <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_type'] == 'singletrip') {
                           echo 'selected';
@@ -98,7 +98,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Alamat</label>
-              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_fromlocation'] : '' ?>" name="t_trip_fromlocation" id="t_trip_fromlocation" class="form-control" placeholder="Alamat">
+              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_fromlocation'] : '' ?>" name="t_trip_fromlocation" id="t_trip_fromlocation" class="form-control" required placeholder="Alamat">
             </div>
           </div>
 
@@ -111,7 +111,7 @@
                     <a href="https://maps.google.com" target="_blank" style="color: inherit;" data-toggle="tooltip" title="Maps Here !"><i class=" icon-pin-alt"></i></a>
                   </span>
                 </span>
-                <input type="text" class="form-control border-left-0" data-toggle="tooltip" title="Klik tanda untuk membuka maps !" name="t_trip_tolocation" id="t_trip_tolocation" placeholder="Link alamat" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_tolocation'] : '' ?>">
+                <input type="text" class="form-control  border-left-0" data-toggle="tooltip" title="Klik tanda untuk membuka maps !" name="t_trip_tolocation" id="t_trip_tolocation" placeholder="Link alamat" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_tolocation'] : '' ?>">
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@
                 <span class="input-group-prepend">
                   <span class="input-group-text"><i class="icon-calendar22"></i></span>
                 </span>
-                <input type="text" class="form-control daterange-single" name="t_start_date" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_start_date'] : '' ?>">
+                <input type="text" class="form-control daterange-single" required name="t_start_date" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_start_date'] : '' ?>">
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Biaya Transport<span class="form-required">*</span></label>
-              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_amount'] : '' ?>" name="t_trip_amount" value="" class="form-control" placeholder="Total Amount">
+              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_amount'] : '' ?>" name="t_trip_amount" value="" class="form-control" required placeholder="Total Amount">
             </div>
           </div>
 
@@ -139,7 +139,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Payment Status</label>
-              <select name="t_trip_paymentstatus" id="t_trip_paymentstatus" class="form-control">
+              <select name="t_trip_paymentstatus" id="t_trip_paymentstatus" class="form-control" required>
                 <option value="">Payment Status</option>
                 <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_trip_paymentstatus'] == 'completed') {
                           echo 'selected';
@@ -151,12 +151,6 @@
 
             </div>
           </div>
-          <div class="col-sm-6 col-md-3 t_trip_pendingamount" style="display: <?php echo ((isset($tripdetails)) && $tripdetails[0]['t_trip_paymentstatus'] == 'pending') ? 'block' : 'none' ?>">
-            <div class="form-group">
-              <label class="form-label">Pending Amount<span class="form-required">*</span></label>
-              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_pendingamount'] : '' ?>" name="t_trip_pendingamount" value="" class="form-control" placeholder="Total Pending Amount">
-            </div>
-          </div>
         </div>
 
         <?php if (isset($tripdetails)) { ?>
@@ -164,17 +158,17 @@
           <div class="row">
             <div class="col-sm-6 col-md-3 ">
               <div class="form-group">
-                <input type="text" class="form-control" id="e_expense_type" name="e_expense_type[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_type'] : '' ?>" placeholder="Expense Type">
+                <input type="text" class="form-control" required id="e_expense_type" name="e_expense_type[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_type'] : '' ?>" placeholder="Expense Type">
               </div>
             </div>
             <div class="col-sm-6 col-md-3 ">
               <div class="form-group">
-                <input type="text" class="form-control" id="e_expense_desc" name="e_expense_desc[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_desc'] : '' ?>" placeholder="Expense description">
+                <input type="text" class="form-control" required id="e_expense_desc" name="e_expense_desc[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_desc'] : '' ?>" placeholder="Expense description">
               </div>
             </div>
             <div class="col-sm-3 col-md-3">
               <div class="form-group">
-                <input type="text" class="form-control" id="e_expense_amount" name="e_expense_amount[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_amount'] : '' ?>" placeholder="Value">
+                <input type="text" class="form-control" required id="e_expense_amount" name="e_expense_amount[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_amount'] : '' ?>" placeholder="Value">
               </div>
             </div>
             <div class="col-sm-3 col-md-3">
@@ -193,17 +187,17 @@
                 <div class="row ">
                   <div class="col-sm-6 col-md-3 ">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="e_expense_type<?php echo output($i) ?>" name="e_expense_type[]" value="<?php echo output($trip_expenses['e_expense_type']); ?>" placeholder="Expense Type">
+                      <input type="text" class="form-control" required id="e_expense_type<?php echo output($i) ?>" name="e_expense_type[]" value="<?php echo output($trip_expenses['e_expense_type']); ?>" placeholder="Expense Type">
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-3 ">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="e_expense_desc<?php echo output($i) ?>" name="e_expense_desc[]" value="<?php echo output($trip_expenses['e_expense_desc']); ?>" placeholder="Expense description">
+                      <input type="text" class="form-control" required id="e_expense_desc<?php echo output($i) ?>" name="e_expense_desc[]" value="<?php echo output($trip_expenses['e_expense_desc']); ?>" placeholder="Expense description">
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="e_expense_amount<?php echo output($i) ?>" name="e_expense_amount[]" value="<?php echo output($trip_expenses['e_expense_amount']); ?>" placeholder="Value">
+                      <input type="text" class="form-control" required id="e_expense_amount<?php echo output($i) ?>" name="e_expense_amount[]" value="<?php echo output($trip_expenses['e_expense_amount']); ?>" placeholder="Value">
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3">
