@@ -15,6 +15,11 @@ class Workorder_model extends CI_Model
   {
     return $this->db->select('*')->from('workorder')->where('wo_id', $id)->get()->row();
   }
+
+  public function getDetailBy($data)
+  {
+    return $this->db->select('*')->from('workorder')->where($data)->get()->row();
+  }
   public function getDetailArray($wo_id)
   {
     return $this->db->select('*')->from('workorder')->where('wo_id', $wo_id)->get()->result_array();

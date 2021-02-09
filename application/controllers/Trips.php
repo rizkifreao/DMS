@@ -8,7 +8,7 @@ class Trips extends CI_Controller
   {
     parent::__construct();
     $this->load->database();
-    $this->load->model('trips_model');
+    $this->load->model('trips_model','workorder_model','vehicle_model');
     $this->load->helper(array('form', 'url', 'string'));
     $this->load->library('form_validation');
     $this->load->library('session');
@@ -89,5 +89,20 @@ class Trips extends CI_Controller
     //   $this->session->set_flashdata('warningmessage', 'Error! Your input are not allowed.Please try again');
     //   redirect('trips');
     // }
+  }
+
+  public function viewDetail($id)
+  {
+    $trip = $this->trips_model->getDetail($id);
+    if ($trip) {
+      $data = ['trip' => $trip, 
+      'det_trip' => $this->workorder_model->getDetailBy(['t_id' => $trip->t_id]),
+      'vechicle'=>$this->vehicle_model->getDetail($trip->t_vechicle)];
+      // echo json_encode($data);
+      $this->template->template_render('trips/trip_detail',$data);
+    }else{
+      $this->session->set_flashdata('warningmessage', 'Data tidak ditemukan');
+      redirect('trips');
+    }
   }
 }

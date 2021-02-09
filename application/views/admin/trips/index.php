@@ -80,6 +80,7 @@
 
                   <div class="dropdown-menu dropdown-menu-right">
                     <a href="<?php echo base_url(); ?>trips/edittrip/<?php echo output($triplists['t_id']); ?>" class="dropdown-item"><i class="icon-pencil"></i>Ubah</a>
+                    <a href="<?php echo base_url(); ?>trips/viewDetail/<?php echo output($triplists['t_id']); ?>" class="dropdown-item"><i class="icon-eye"></i>Lihat</a>
                     <a href="#" class="dropdown-item"><i class="icon-eraser2"></i> Hapus</a>
                   </div>
                 </div>
