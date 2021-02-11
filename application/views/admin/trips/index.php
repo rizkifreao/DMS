@@ -50,7 +50,6 @@
           <th class="w-1">NO</th>
           <th>Pelanggan</th>
           <th>Kendaraan</th>
-          <th>Type</th>
           <th>Supir</th>
           <th>Alamat</th>
           <th>Payment Status</th>
@@ -66,11 +65,10 @@
                   $count++; ?></td>
             <td> <?php echo $triplists['t_customer_id']; ?></td>
             <td> <?php echo output($triplists['t_vechicle_details']->v_name) . '-' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
-            <td><?php echo ucfirst($triplists['t_type']); ?></td>
             <td><?php echo output($triplists['t_driver_details']->first_name); ?></td>
             <td><?= $triplists['t_trip_fromlocation'] ?> &nbsp; <a href="<?= $triplists['t_trip_tolocation'] ?>" data-toggle="tooltip" target="_blank" title="Klik untuk membuka maps"><i class="icon-map5"></i></a></td>
             <td> <span class="badge <?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'badge-success' : 'badge-danger'; ?> "><?php echo ($triplists['t_trip_paymentstatus'] == 'completed') ? 'Completed' : 'Pending'; ?> </span> </td>
-            <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'badge-danger' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'OnGoing' : 'Completed'; ?></span></td>
+            <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'badge-waring' : ($triplists['t_trip_status'] == 'Pending') ? 'badge-info' : 'badge-success'; ?>"><?php echo ($triplists['t_trip_status'] == 'OnGoing') ? 'OnGoing' : ($triplists['t_trip_status'] == 'Pending') ? 'Pending' : 'Completed'; ?></span></td>
             <td class="text-center">
               <div class="list-icons">
                 <div class="dropdown">
@@ -81,7 +79,7 @@
                   <div class="dropdown-menu dropdown-menu-right">
                     <a href="<?php echo base_url(); ?>trips/edittrip/<?php echo output($triplists['t_id']); ?>" class="dropdown-item"><i class="icon-pencil"></i>Ubah</a>
                     <a href="<?php echo base_url(); ?>trips/viewDetail/<?php echo output($triplists['t_id']); ?>" class="dropdown-item"><i class="icon-eye"></i>Lihat</a>
-                    <a href="#" class="dropdown-item"><i class="icon-eraser2"></i> Hapus</a>
+                    <a href="#" onclick="cetakSurat(<?php echo output($triplists['t_id']); ?>)" class="dropdown-item"><i class="icon-printer"></i>Cetak Surat</a>
                   </div>
                 </div>
               </div>
@@ -93,3 +91,9 @@
   </div>
   <!-- /state saving -->
 </div>
+
+<script>
+  function cetakSurat(id) {
+    window.open(base_url+'trips/cetakSurat/'+id, 'mywindow', 'width=1000,height=900')
+  }
+</script>

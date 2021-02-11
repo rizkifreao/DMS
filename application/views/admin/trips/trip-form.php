@@ -80,25 +80,11 @@
               </select>
             </div>
           </div>
-          <div class="col-sm-6 col-md-3">
-            <div class="form-group">
-              <label class="form-label">Trip Type<span class="form-required">*</span></label>
-              <select id="t_type" class="form-control" required name="t_type">
-                <option value="">Select Trip Type</option>
-                <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_type'] == 'singletrip') {
-                          echo 'selected';
-                        } ?> value="singletrip">Single Trip</option>
-                <option <?php if ((isset($tripdetails)) && $tripdetails[0]['t_type'] == 'roundtrip') {
-                          echo 'selected';
-                        } ?> value="roundtrip">Round Trip</option>
-              </select>
-            </div>
-          </div>
 
           <div class="col-sm-6 col-md-3">
             <div class="form-group">
               <label class="form-label">Alamat</label>
-              <input type="text" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_fromlocation'] : '' ?>" name="t_trip_fromlocation" id="t_trip_fromlocation" class="form-control" required placeholder="Alamat">
+              <textarea type="text" name="t_trip_fromlocation" id="t_trip_fromlocation" class="form-control" required placeholder="Alamat"><?php echo (isset($tripdetails)) ? $tripdetails[0]['t_trip_fromlocation'] : '' ?></textarea>
             </div>
           </div>
 
@@ -153,64 +139,61 @@
           </div>
         </div>
 
-        <?php if (isset($tripdetails)) { ?>
-          <h6>Trip Expenses</h6>
+        <h6>Detail Barang</h6>
+        <?php if ($trip_expense) : ?>
+          <?php $i = 0;
+          foreach ($trip_expense as $key => $val) { ?>
+            <div class="removeclass<?php echo output(++$i) ?>">
+              <div class="row ">
+                <div class="col-sm-6 col-md-3 ">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="e_expense_type<?php echo output($i) ?>" name="e_expense_type[]" value="<?php echo output($val->e_expense_type); ?>" placeholder="Nama Barang">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3 ">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="e_expense_desc<?php echo output($i) ?>" name="e_expense_desc[]" value="<?php echo output($val->e_expense_desc); ?>" placeholder="Kode Barang">
+                  </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="e_expense_amount<?php echo output($i) ?>" name="e_expense_amount[]" value="<?php echo output($val->e_expense_amount); ?>" placeholder="Jumlah">
+                  </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                  <div class="input-group-btn">
+                    <button class="btn btn-<?= ($key == 0) ? 'success' : 'danger' ?> " type="button" onclick="<?= ($key == 0) ? 'expense_fields();' : 'remove_expense_fields(' . $i . ');' ?>"> <span class="fe fe-minus" aria-hidden="true"></span> <?= ($key == 0) ? '+' : '-' ?> </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php } ?>
+        <?php else : ?>
           <div class="row">
             <div class="col-sm-6 col-md-3 ">
               <div class="form-group">
-                <input type="text" class="form-control" required id="e_expense_type" name="e_expense_type[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_type'] : '' ?>" placeholder="Expense Type">
+                <input type="text" class="form-control" required id="e_expense_type" name="e_expense_type[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_type'] : '' ?>" placeholder="Nama Barang">
               </div>
             </div>
             <div class="col-sm-6 col-md-3 ">
               <div class="form-group">
-                <input type="text" class="form-control" required id="e_expense_desc" name="e_expense_desc[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_desc'] : '' ?>" placeholder="Expense description">
+                <input type="text" class="form-control" required id="e_expense_desc" name="e_expense_desc[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_desc'] : '' ?>" placeholder="Kode Barang">
               </div>
             </div>
             <div class="col-sm-3 col-md-3">
               <div class="form-group">
-                <input type="text" class="form-control" required id="e_expense_amount" name="e_expense_amount[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_amount'] : '' ?>" placeholder="Value">
+                <input type="text" class="form-control" id="e_expense_amount" name="e_expense_amount[]" value="<?php echo (isset($trip_expense) && !empty($trip_expense)) ? $trip_expense[0]['e_expense_amount'] : '' ?>" placeholder="Jumlah">
               </div>
             </div>
             <div class="col-sm-3 col-md-3">
               <div class="input-group-btn">
-                <button class="btn btn-success" type="button" onclick="expense_fields();"> <span class="fe fe-plus" aria-hidden="true"></span> </button>
+                <button class="btn btn-success" type="button" onclick="expense_fields();"> <span class="fe fe-plus" aria-hidden="true"></span> + </button>
               </div>
             </div>
           </div>
-          <?php $trip_expense_all = array();
-          if (isset($trip_expense)) {
-            $i = 1;
-            array_shift($trip_expense);
-            foreach ($trip_expense as $trip_expenses) {
-          ?>
-              <div class="removeclass<?php echo output($i) ?>">
-                <div class="row ">
-                  <div class="col-sm-6 col-md-3 ">
-                    <div class="form-group">
-                      <input type="text" class="form-control" required id="e_expense_type<?php echo output($i) ?>" name="e_expense_type[]" value="<?php echo output($trip_expenses['e_expense_type']); ?>" placeholder="Expense Type">
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-md-3 ">
-                    <div class="form-group">
-                      <input type="text" class="form-control" required id="e_expense_desc<?php echo output($i) ?>" name="e_expense_desc[]" value="<?php echo output($trip_expenses['e_expense_desc']); ?>" placeholder="Expense description">
-                    </div>
-                  </div>
-                  <div class="col-sm-3 col-md-3">
-                    <div class="form-group">
-                      <input type="text" class="form-control" required id="e_expense_amount<?php echo output($i) ?>" name="e_expense_amount[]" value="<?php echo output($trip_expenses['e_expense_amount']); ?>" placeholder="Value">
-                    </div>
-                  </div>
-                  <div class="col-sm-3 col-md-3">
-                    <div class="input-group-btn">
-                      <button class="btn btn-danger" type="button" onclick="remove_expense_fields(<?php echo output($i) ?>);"> <span class="fe fe-minus" aria-hidden="true"></span> </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        <?php $i++;
-            }
-          }
-        } ?>
+        <?php endif; ?>
+
+        <div id="new_exp_row"></div>
       </div>
       <!-- END CARD BODY -->
       <input type="hidden" name="t_created_by" id="t_created_by" value="<?= $this->session->get_userdata()['user_id'] ?>">
@@ -224,3 +207,24 @@
   </div>
   <!-- /state saving -->
 </div>
+
+
+<div class="clear"></div>
+
+<script>
+  var row = 1;
+
+  function expense_fields() {
+    row++;
+    var objTo = document.getElementById('new_exp_row')
+    var divtest = document.createElement("div");
+    divtest.setAttribute("class", "removeclass" + row);
+    var rdiv = 'removeclass' + row;
+    divtest.innerHTML = '<div class="row"> <div class="col-sm-6 col-md-3 "> <div class="form-group"> <input type="text" class="form-control" id="e_expense_type" required="true" name="e_expense_type[]" value="" placeholder="Nama Barang"> </div> </div> <div class="col-sm-6 col-md-3 "> <div class="form-group"> <input type="text" class="form-control" id="e_expense_desc" required="true" name="e_expense_desc[]" value="" placeholder="Kode Barang"> </div> </div> <div class="col-sm-3 col-md-3"> <div class="form-group"> <input type="text" class="form-control" id="e_expense_amount" required="true" name="e_expense_amount[]" value="" placeholder="Jumlah"> </div> </div> <div class="col-sm-3 col-md-3"> <div class="input-group-btn"> <button class="btn btn-danger" type="button" onclick="remove_expense_fields(' + row + ');"> <span class="fe fe-minus" aria-hidden="true"></span> - </button> </div> </div> </div> <div class="clear"></div>';
+    objTo.appendChild(divtest)
+  }
+
+  function remove_expense_fields(rid) {
+    $('.removeclass' + rid).remove();
+  }
+</script>

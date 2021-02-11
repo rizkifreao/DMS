@@ -87,40 +87,82 @@
             <span class="form-text text-muted">Klik ikon untuk membuka maps !</span>
           </div>
         </div>
+
+        <div class="col-sm-6 col-md-4">
+          <div class="form-group">
+            <label class="form-label">Driver</span></label>
+            <input type="text" value="<?= $driver->first_name ?>" class="form-control" placeholder="Nama Pelanggan" disabled>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <div class="form-group">
+            <label class="form-label">Status Pengiriman</span></label>
+            <input type="text" value="<?= $trip->t_trip_status ?>" class="form-control" placeholder="Nama Pelanggan" disabled>
+          </div>
+        </div>
       </div>
+      <?php if ($barang) { ?>
+        <h6>Detail Barang</h6>
+        <div class="row">
+          <div class="col-sm-6 col-md-3 ">
+            <label class="form-label">Nama Barang</span></label>
+          </div>
+          <div class="col-sm-6 col-md-3 ">
+            <label class="form-label">Kode Barang</span></label>
+          </div>
+          <div class="col-sm-6 col-md-3 ">
+            <label class="form-label">Jumlah Barang</span></label>
+          </div>
+        </div>
+        <?php foreach ($barang as $key) { ?>
+          <div class="row">
+            <div class="col-sm-6 col-md-3 ">
+              <div class="form-group">
+                <input type="text" class="form-control" required disabled id="e_expense_type" name="e_expense_type[]" value="<?php echo (isset($key->e_expense_type) && !empty($key->e_expense_type)) ? $key->e_expense_type : '' ?>" placeholder="Nama Barang">
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 ">
+              <div class="form-group">
+                <input type="text" class="form-control" required disabled id="e_expense_desc" name="e_expense_desc[]" value="<?php echo (isset($key->e_expense_desc) && !empty($key->e_expense_desc)) ? $key->e_expense_desc : '' ?>" placeholder="Kode Barang">
+              </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <input type="text" class="form-control" id="e_expense_amount" disabled name="e_expense_amount[]" value="<?php echo (isset($key->e_expense_amount) && !empty($key->e_expense_amount)) ? $key->e_expense_amount : '' ?>" placeholder="Jumlah">
+              </div>
+            </div>
+          </div>
+
+      <?php }
+      } ?>
     </div>
   </div>
 
-  <?php if ($det_trip) { ?>
-    <?php $link_p_fuel = base_url('public')."/img/trips_".$trip->t_id."/".$det_trip->p_fuel ?>
-    <?php $link_s_fuel = base_url('public')."/img/trips_".$trip->t_id."/".$det_trip->s_fuel ?>
-    <?php $link_p_km = base_url('public')."/img/trips_".$trip->t_id."/".$det_trip->p_km ?>
+  <?php if ($det_trip_start) { ?>
+    <?php $start_p_fuel = base_url('public') . "/img/trips_" . $trip->t_id . "/" . $det_trip_start->p_fuel ?>
+    <?php $start_s_fuel = base_url('public') . "/img/trips_" . $trip->t_id . "/" . $det_trip_start->s_fuel ?>
+    <?php $start_p_km = base_url('public') . "/img/trips_" . $trip->t_id . "/" . $det_trip_start->p_km ?>
+    <h2>Dokumen Awal Pengiriman</h2>
     <div class="row">
       <div class="col-sm-6 col-xl-3">
         <div class="card">
           <div class="card-img-actions mx-1 mt-1">
-            <img class="card-img img-fluid" src="<?= $link_p_fuel ?>" alt="">
+            <img class="card-img img-fluid" src="<?= $start_p_fuel ?>" alt="">
             <div class="card-img-actions-overlay card-img">
-              <a href="<?= $link_p_fuel ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+              <a href="<?= $start_p_fuel ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
                 <i class="icon-plus3"></i>
               </a>
-
-              <!-- <a href="<?= base_url('public') ?>/img/trips_4/4-Bukti_Bensin.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-              <i class="icon-link"></i>
-            </a> -->
             </div>
           </div>
-
           <div class="card-body">
             <div class="d-flex align-items-start flex-nowrap">
               <div>
                 <div class="font-weight-semibold mr-2">Photo Bensin</div>
                 <span class="font-size-sm text-muted">Size: 432kb</span>
               </div>
-
               <div class="list-icons list-icons-extended ml-auto">
-                <a href="<?= $link_p_fuel?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
-                <!-- <a href="#" class="list-icons-item"><i class="icon-bin top-0"></i></a> -->
+                <a href="<?= $start_p_fuel ?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
               </div>
             </div>
           </div>
@@ -129,28 +171,21 @@
       <div class="col-sm-6 col-xl-3">
         <div class="card">
           <div class="card-img-actions mx-1 mt-1">
-            <img class="card-img img-fluid" src="<?= $link_s_fuel ?>" alt="">
+            <img class="card-img img-fluid" src="<?= $start_s_fuel ?>" alt="">
             <div class="card-img-actions-overlay card-img">
-              <a href="<?= $link_s_fuel ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+              <a href="<?= $start_s_fuel ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
                 <i class="icon-plus3"></i>
               </a>
-
-              <!-- <a href="<?= base_url('public') ?>/img/trips_4/4-Bukti_Bensin.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-              <i class="icon-link"></i>
-            </a> -->
             </div>
           </div>
-
           <div class="card-body">
             <div class="d-flex align-items-start flex-nowrap">
               <div>
                 <div class="font-weight-semibold mr-2">Photo Struk Bensin</div>
                 <span class="font-size-sm text-muted">Size: 332kb</span>
               </div>
-
               <div class="list-icons list-icons-extended ml-auto">
-                <a href="<?= $link_s_fuel?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
-                <!-- <a href="#" class="list-icons-item"><i class="icon-bin top-0"></i></a> -->
+                <a href="<?= $start_s_fuel ?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
               </div>
             </div>
           </div>
@@ -159,37 +194,109 @@
       <div class="col-sm-6 col-xl-3">
         <div class="card">
           <div class="card-img-actions mx-1 mt-1">
-            <img class="card-img img-fluid" src="<?= $link_p_km ?>" alt="">
+            <img class="card-img img-fluid" src="<?= $start_p_km ?>" alt="">
             <div class="card-img-actions-overlay card-img">
-              <a href="<?= $link_p_km ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+              <a href="<?= $start_p_km ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
                 <i class="icon-plus3"></i>
               </a>
-
-              <!-- <a href="<?= base_url('public') ?>/img/trips_4/4-Bukti_Bensin.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-              <i class="icon-link"></i>
-            </a> -->
             </div>
           </div>
-
           <div class="card-body">
             <div class="d-flex align-items-start flex-nowrap">
               <div>
                 <div class="font-weight-semibold mr-2">Photo Kilometer</div>
                 <span class="font-size-sm text-muted">Size: 632kb</span>
               </div>
-
               <div class="list-icons list-icons-extended ml-auto">
-                <a href="<?= $link_p_km?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
-                <!-- <a href="#" class="list-icons-item"><i class="icon-bin top-0"></i></a> -->
+                <a href="<?= $start_p_km ?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  <?php } else { ?>
-    Tidak Ada data
-  <?php } ?>
+  <?php }
+
+  if ($det_trip_end) { ?>
+    <?php $end_p_fuel = base_url('public') . "/img/trips_" . $trip->t_id . "/" . $det_trip_end->p_fuel ?>
+    <?php $end_s_fuel = base_url('public') . "/img/trips_" . $trip->t_id . "/" . $det_trip_end->s_fuel ?>
+    <?php $end_p_km = base_url('public') . "/img/trips_" . $trip->t_id . "/" . $det_trip_end->p_km ?>
+    <hr>
+    <h2>Dokumen Akhir Pengiriman</h2>
+    <div class="row">
+      <div class="col-sm-6 col-xl-3">
+        <div class="card">
+          <div class="card-img-actions mx-1 mt-1">
+            <img class="card-img img-fluid" src="<?= $end_p_fuel ?>" alt="">
+            <div class="card-img-actions-overlay card-img">
+              <a href="<?= $end_p_fuel ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+                <i class="icon-plus3"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-start flex-nowrap">
+              <div>
+                <div class="font-weight-semibold mr-2">Photo Bensin</div>
+                <span class="font-size-sm text-muted">Size: 432kb</span>
+              </div>
+              <div class="list-icons list-icons-extended ml-auto">
+                <a href="<?= $end_p_fuel ?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="card">
+          <div class="card-img-actions mx-1 mt-1">
+            <img class="card-img img-fluid" src="<?= $end_s_fuel ?>" alt="">
+            <div class="card-img-actions-overlay card-img">
+              <a href="<?= $end_s_fuel ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+                <i class="icon-plus3"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-start flex-nowrap">
+              <div>
+                <div class="font-weight-semibold mr-2">Photo Struk Bensin</div>
+                <span class="font-size-sm text-muted">Size: 332kb</span>
+              </div>
+              <div class="list-icons list-icons-extended ml-auto">
+                <a href="<?= $end_s_fuel ?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="card">
+          <div class="card-img-actions mx-1 mt-1">
+            <img class="card-img img-fluid" src="<?= $end_p_km ?>" alt="">
+            <div class="card-img-actions-overlay card-img">
+              <a href="<?= $end_p_km ?>" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+                <i class="icon-plus3"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-items-start flex-nowrap">
+              <div>
+                <div class="font-weight-semibold mr-2">Photo Kilometer</div>
+                <span class="font-size-sm text-muted">Size: 632kb</span>
+              </div>
+              <div class="list-icons list-icons-extended ml-auto">
+                <a href="<?= $end_p_km ?>" download class="list-icons-item"><i class="icon-download top-0"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } if(empty($det_trip_start) && empty($det_trip_end)) {
+    echo "<h6>Data ini belum memiliki foto dokumen apapun !</h6>";
+  } ?>
 
 
 </div>

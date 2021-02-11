@@ -30,18 +30,20 @@ class Wo extends CI_Controller
     $this->template->template_render('workorder/index', $res);
   }
 
-  public function get_trip()
+  public function create_wo($id)
   {
-    $id = $this->input->get('id');
+    
     $data = $this->trips_model->getAllBy(['t_id' => $id]);
     $res['tripdetails'] = $this->trips_model->get_tripdetails($id);
     $res['vechicle'] = $this->vehicle_model->getDetail($data[0]['t_vechicle']);
     $res['wo'] = $this->workorder_model->getAllBy(['t_id' => $id]);
     $res['header_name'] = "Proses Trip";
+    $res['trip_expense'] = $this->trips_model->getall_trips_expense($id);
+    $res['tripdetails'] = $this->trips_model->get_tripdetails($id);
     echo json_encode($res);
     // echo var_dump($res);
     // echo json_encode($this->vehicle_model->getDetail(1)->v_name);
-    // $this->template->template_render('workorder/proses', $res);
+    // $this->template->template_render('workorder/create', $res);
   }
 
   public function take_wo()

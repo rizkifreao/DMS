@@ -23,11 +23,12 @@ class Trips_model extends CI_Model
   }
   public function getall_trips_expense($t_id)
   {
-    return $this->db->select('*')->from('trips_expense')->where('e_trip_id', $t_id)->get()->result_array();
+    return $this->db->select('*')->from('trips_expense')->where('e_trip_id', $t_id)->get()->result();
   }
   public function add_trip_expense($data)
   {
-    $this->db->delete('trips_expense', array('e_trip_id' => $data[0]['e_trip_id']));
+    // $this->db->insert('trips_expense', array('e_trip_id' => $data[0]['e_trip_id']));
+    $this->db->delete('trips_expense', ['e_trip_id' => $data[0]['e_trip_id']]);
     return  $this->db->insert_batch('trips_expense', $data);
   }
   public function getall_trips()
