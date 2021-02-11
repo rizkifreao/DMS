@@ -111,24 +111,13 @@
                     <td> <?php echo output($triplists['t_vechicle_details']->v_name) . ' - ' . output($triplists['t_vechicle_details']->v_registration_no); ?></td>
                     <td><?php echo ucfirst($triplists['t_type']); ?></td>
                     <td><?= $triplists['t_trip_fromlocation'] ?> &nbsp; <a href="<?= $triplists['t_trip_tolocation'] ?>" data-toggle="tooltip" target="_blank" title="Klik untuk membuka maps"><i class="icon-map5"></i></a></td>
-                    <td>tgl kirim</td>
+                    <td><?php echo ucfirst($triplists['t_start_date']); ?></td>
                     <td><span class="badge <?php echo ($triplists['t_trip_status'] == 'Pending') ? 'badge-info' : 'badge-success'; ?> "><?php echo ($triplists['t_trip_status'] == 'Pending') ? 'Pending' : 'Completed'; ?></span></td>
                     <td class="text-center">
-                      <!-- <div class="list-icons">
-                      <div class="dropdown">
-                        <a href="#" class="list-icons-item" data-toggle="dropdown">
-                          <i class="icon-menu9"></i>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                          <a href="<?php echo base_url(); ?>trips/edittrip/<?php echo output($triplists['t_id']); ?>" class="dropdown-item"><i class="icon-pencil"></i>Ubah</a>
-                          <a href="#" class="dropdown-item"><i class="icon-eraser2"></i> Hapus</a>
-                        </div>
-                      </div>
-                    </div> -->
+                      
                       <div>
-                        <!-- <button href="<?php echo base_url(); ?>wo/proses_trip/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Proses</button> -->
-                        <button id="btn-proses" data-id="<?php echo output($triplists['t_id']); ?>" onclick="getDetail(this)" class="btn btn-sm bg-teal-400""><i class=" icon-paperplane mr-2"></i> Ambil</button>
+                        <a href="<?php echo base_url(); ?>wo/create_wo/<?php echo output($triplists['t_id']); ?>" class="btn btn-sm bg-teal-400"><i class="icon-paperplane mr-2"></i> Ambil</a>
+                        <!-- <button id="btn-proses" data-id="<?php echo output($triplists['t_id']); ?>" onclick="getDetail(this)" class="btn btn-sm bg-teal-400""><i class=" icon-paperplane mr-2"></i> Ambil</button> -->
                       </div>
                     </td>
                   </tr>

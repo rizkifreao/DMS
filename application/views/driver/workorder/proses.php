@@ -87,6 +87,7 @@
 
     <form method="post" action="<?php echo base_url(); ?>wo/savewo" enctype="multipart/form-data">
       <div class="card-body">
+        <h3>Evidence Pengiriman Selesai</h3>
         <div class="row">
           <input type="hidden" name="t_id" id="t_id" value="<?php echo (isset($tripdetails)) ? $tripdetails[0]['t_id'] : '' ?>">
 

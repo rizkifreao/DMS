@@ -40,10 +40,9 @@ class Wo extends CI_Controller
     $res['header_name'] = "Proses Trip";
     $res['trip_expense'] = $this->trips_model->getall_trips_expense($id);
     $res['tripdetails'] = $this->trips_model->get_tripdetails($id);
-    echo json_encode($res);
-    // echo var_dump($res);
-    // echo json_encode($this->vehicle_model->getDetail(1)->v_name);
-    // $this->template->template_render('workorder/create', $res);
+    $res['barang'] = $this->trips_model->getall_trips_expense($id);
+    // echo json_encode($res);
+    $this->template->template_render('workorder/create', $res);
   }
 
   public function take_wo()
@@ -78,7 +77,12 @@ class Wo extends CI_Controller
 
   public function savewo()
   {
+    $id = $this->input->post('t_id');
+    $gps = $this->input->post('koordinat');
     $post = $this->input->post();
+    $kilometer = "";
+    $bensin = "";
+    $struk_bensin = "";
     $p_km = $_FILES['p_km']['name'];
     $p_fuel = $_FILES['p_fuel']['name'];
     $s_fuel = $_FILES['s_fuel']['name'];
@@ -96,7 +100,7 @@ class Wo extends CI_Controller
     if (!empty($p_km)) {
       $x = explode(".", $p_km);
       $ext = strtolower(end($x));
-      $config['file_name'] = $post['t_id'] . "-kilometer." . $ext;
+      $config['file_name'] = $post['t_id'] . "-kilometer-pulang." . $ext;
       $kilometer = $config['file_name'];
       $this->upload->initialize($config);
       $this->upload->do_upload('p_km');
@@ -105,7 +109,7 @@ class Wo extends CI_Controller
     if (!empty($p_fuel)) {
       $x = explode(".", $p_fuel);
       $ext = strtolower(end($x));
-      $config['file_name'] = $post['t_id'] . "-Bukti_Bensin." . $ext;
+      $config['file_name'] = $post['t_id'] . "-Bukti_Bensin-pulang." . $ext;
       $bensin = $config['file_name'];
       $this->upload->initialize($config);
       $this->upload->do_upload('p_fuel');
@@ -114,7 +118,7 @@ class Wo extends CI_Controller
     if (!empty($s_fuel)) {
       $x = explode(".", $s_fuel);
       $ext = strtolower(end($x));
-      $config['file_name'] = $post['t_id'] . "-Struk_Bensin." . $ext;
+      $config['file_name'] = $post['t_id'] . "-Struk_Bensin-pulang." . $ext;
       $struk_bensin = $config['file_name'];
       $this->upload->initialize($config);
       $this->upload->do_upload('s_fuel');
@@ -141,7 +145,7 @@ class Wo extends CI_Controller
       $data['b_fuel'] = $post['b_fuel'];
       $data['location'] = $post['location'];
       $data['pengeluaran'] = $post['pengeluaran'];
-      $this->trips_model->update($post['t_id'],['t_trip_status' => "Completed"]);
+      $this->trips_model->update($id, ['t_trip_status' => "Completed", "t_trip_fromlog" => $gps]);
       $this->workorder_model->add($data);
       $user = $this->ion_auth->user()->row();
       $detwo = $this->trips_model->getDetail($post['t_id']);
@@ -153,6 +157,89 @@ class Wo extends CI_Controller
       ]);
       $this->session->set_flashdata('successmessage', "Data pengiriman berhasil di perbaharui");
       redirect('wo','refresh');
+    }
+  }
+
+  public function save_berangkat()
+  {
+    $id = $this->input->post('t_id');
+    $gps = $this->input->post('koordinat');
+    $post = $this->input->post();
+    $kilometer = "";
+    $bensin = "";
+    $struk_bensin = "";
+    $p_km = $_FILES['p_km']['name'];
+    $p_fuel = $_FILES['p_fuel']['name'];
+    $s_fuel = $_FILES['s_fuel']['name'];
+    $this->load->library('upload');
+
+    if (!file_exists('./public/img/trips_' . $post['t_id'] . '/')) {
+      mkdir('./public/img/trips_' . $post['t_id'] . '/', 0777, true);
+    }
+    $config['upload_path'] = './public/img/trips_' . $post['t_id'] . '/';
+    $config['file_types'] = array('image/jpeg', 'image/png', 'image/jpeg', 'application/x-download');
+    $config['allowed_types'] = array("png", "jpg", "jpeg");
+    $config['file_ext_tolower'] = TRUE;
+    $config['overwrite'] = TRUE;
+
+    if (!empty($p_km)) {
+      $x = explode(".", $p_km);
+      $ext = strtolower(end($x));
+      $config['file_name'] = $post['t_id'] . "-kilometer-pergi." . $ext;
+      $kilometer = $config['file_name'];
+      $this->upload->initialize($config);
+      $this->upload->do_upload('p_km');
+    }
+
+    if (!empty($p_fuel)) {
+      $x = explode(".", $p_fuel);
+      $ext = strtolower(end($x));
+      $config['file_name'] = $post['t_id'] . "-Bukti_Bensin-pergi." . $ext;
+      $bensin = $config['file_name'];
+      $this->upload->initialize($config);
+      $this->upload->do_upload('p_fuel');
+    }
+
+    if (!empty($s_fuel)) {
+      $x = explode(".", $s_fuel);
+      $ext = strtolower(end($x));
+      $config['file_name'] = $post['t_id'] . "-Struk_Bensin-pergi." . $ext;
+      $struk_bensin = $config['file_name'];
+      $this->upload->initialize($config);
+      $this->upload->do_upload('s_fuel');
+    }
+
+    if (!empty($p_km) && !$this->upload->do_upload('p_km')) {
+      $errormsg = $this->upload->display_errors();
+      // echo json_encode($errormsg);
+      $this->session->set_flashdata('warningmessage', $errormsg);
+      redirect('dashboard');
+    } else if (!empty($p_fuel) && !$this->upload->do_upload('p_fuel')) {
+      $errormsg = $this->upload->display_errors();
+      $this->session->set_flashdata('warningmessage', $errormsg);
+      redirect('dashboard');
+    } else if (!empty($s_fuel) && !$this->upload->do_upload('s_fuel')) {
+      $errormsg = $this->upload->display_errors();
+      $this->session->set_flashdata('warningmessage', $errormsg);
+      redirect('dashboard');
+    } else {
+      $data['t_id'] = $post['t_id'];
+      $data['p_km'] = $kilometer;
+      $data['p_fuel'] = $bensin;
+      $data['s_fuel'] = $struk_bensin;
+      $data['b_fuel'] = $post['b_fuel'];
+      $this->trips_model->update($id, ['t_trip_status' => "OnGoing", "t_trip_fromlat" => $gps]);
+      $this->workorder_model->add($data);
+      $user = $this->ion_auth->user()->row();
+      $detwo = $this->trips_model->getDetail($post['t_id']);
+      sendWA([
+        // 'notelp' => "083101194384",
+        'notelp' => $this->ion_auth->user(1)->row()->phone,
+        'msg' => "*Notifikasi*\n" . $user->first_name . " telah selesai melakukan pengiriman dengan detail sebagai berikut :\n Trip ID : " . $post['t_id'] . "\nPelanggan : " . $detwo->t_customer_id . "\nAlamat : " . $detwo->t_trip_fromlocation,
+        'loc' => $post['location']
+      ]);
+      $this->session->set_flashdata('successmessage', "Data pengiriman berhasil di perbaharui");
+      redirect('wo/proses_trip/'. $post['t_id'], 'refresh');
     }
   }
 
