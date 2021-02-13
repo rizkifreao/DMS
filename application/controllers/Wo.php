@@ -152,7 +152,7 @@ class Wo extends CI_Controller
       sendWA([
         // 'notelp' => "083101194384",
         'notelp' => $this->ion_auth->user(1)->row()->phone,
-        'msg' => "*Notifikasi*\n" . $user->first_name . " telah selesai melakukan pengiriman dengan detail sebagai berikut :\n Trip ID : ". $post['t_id']."\nPelanggan : " . $detwo->t_customer_id . "\nAlamat : " . $detwo->t_trip_fromlocation,
+        'msg' => "*Notifikasi*\n" . $user->first_name . " telah selesai melakukan pengiriman dengan detail sebagai berikut :\n Trip ID : ". $post['t_id']."\nPelanggan : " . $detwo->t_customer_id . "\nAlamat : " . $detwo->t_trip_fromlocation. "\Kendala : " . $post['kendala'],
         'loc' => $post['location']
       ]);
       $this->session->set_flashdata('successmessage', "Data pengiriman berhasil di perbaharui");

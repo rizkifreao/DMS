@@ -125,11 +125,18 @@
               <input type="text" name="pengeluaran" class="form-control" placeholder="Total Pengeluaran">
             </div>
           </div>
+
+          <div class="col-md-6 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label class="form-label">Kendala</span></label>
+              <textarea type="text" name="kendala" class="form-control" placeholder="Jelaskan kendala perjalanan jika ada"></textarea>
+            </div>
+          </div>
         </div>
         <!-- END CARD BODY -->
         <input type="hidden" name="location" id="lokasi">
         <div class="card-footer d-flex justify-content-between align-items-center bg-teal-400 border-top-0">
-          <button type="submit" class="btn bg-transparent text-white border-white border-2"> Batal
+          <button type="hidden" class="btn bg-transparent text-white border-white border-2"> Batal </button>
             <button type="submit" class="btn btn-outline bg-white text-white border-white border-2"> Simpan
               <i class="icon-paperplane ml-2"></i>
             </button>
